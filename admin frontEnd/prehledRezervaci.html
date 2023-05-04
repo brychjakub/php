@@ -1,0 +1,353 @@
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Rezervace CMcZŠ</title>
+
+    
+
+
+<link rel="stylesheet" href="/static/aui/css/aui.css" media="all"/>
+<script type="text/javascript" src="/static/jquery/jquery-min.js"></script>
+<script type="text/javascript" src="/static/aui/js/aui.js"></script>
+<script type="text/javascript" src="/static/aui/js/aui-soy.js"></script>
+<script type="text/javascript" src="/static/aui/js/aui-experimental.js"></script>
+<script type="text/javascript" src="/static/aui/js/aui-datepicker.js"></script>
+
+<script type="text/javascript">
+    AJS.contextPath = function() {
+        return '';
+    }
+    AJS.$(document).ready(function() {
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+</head>
+<body class="aui-layout aui-theme-default" id="page">
+    <div id="page">
+        
+
+
+
+<header id="header" role="banner">
+   <!-- App Header goes inside #header -->
+   <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+      <div class="aui-header-primary">
+        
+
+         <h4 id="logo" class="aui-header-logo aui-header-logo-textonly">
+            <img src="/static/cust/cmzs/img/01.png" style="padding-right: 20px"/>
+            <span class="aui-header-logo-device" style="color: #f2f2f2">Cyrilometodějská církevní základní škola Brno</span>
+         </h4>
+
+
+      </div>
+      <div class="aui-header-secondary">
+
+               
+         <ul class="aui-nav">
+         <li><h1 style="color: #f2f2f2">Rezervační systém</h1></li>
+            <li>
+               <a href="#dropdown2-header9" aria-owns="dropdown2-header9" aria-haspopup="true" class="aui-dropdown2-trigger" aria-controls="dropdown2-header9">
+                  <div class="aui-avatar aui-avatar-small">
+                     <div class="aui-avatar-inner">
+                        <img src="/static/img/user-avatar-16.png"/>
+                     </div>
+                  </div>
+               </a>
+                   <div class="aui-dropdown2 aui-style-default aui-dropdown2-in-header" id="dropdown2-header9" style="display: none; top: 40px; min-width: 160px; left: 1213px;" aria-hidden="true">
+                      <div class="aui-dropdown2-section">
+                         <ul>
+                            <li><a href="/logout">Log out</a></li>
+                         </ul>
+                      </div>
+                   </div>
+            </li>
+         </ul>
+      </div>
+               
+   </nav>
+   <!-- App Header goes inside #header -->
+</header>
+                <div id="page">
+                    <section id="content" role="main">
+                        
+
+
+<!-- Page Header must go inside #content before .aui-page-panel -->
+<div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+        
+
+        <div class="aui-page-panel-nav">
+        <!-- Vertical Nav is usually placed inside .aui-page-panel-nav. Refer to content layout documentation for details. -->
+
+            <nav class="aui-navgroup aui-navgroup-vertical">
+                <div class="aui-navgroup-inner">
+                    <ul class="aui-nav">
+                        <li class="aui-nav-selected"><a href="http://example.com/">Administrace</a></li>
+                    </ul>
+                    <div class="aui-nav-heading"><strong>Události</strong></div>
+                    <ul class="aui-nav">
+                        <li><a href="/admin/event/list">Seznam událostí</a></li>
+                        <li><a href="/admin/event/create/view">Vytvoř novou událost</a></li>
+                    </ul>
+                </div>
+            </nav>
+        <!-- Vertical Nav is usually placed inside aui-page-panel-nav -->
+        </div>
+        <section class="aui-page-panel-content">
+            
+            
+            
+            
+            <h2>Přehled rezervací, Zápis 13.4.2023 - Komise 1</h2>
+            <br/>
+            
+                <button class="aui-button aui-button-subtle" onclick="window.location.href='/admin/event/100/overview/export/do'">
+                    <span class="csv-export-action aui-icon aui-icon-small aui-iconfont-export"></span>
+                    "Export do CSV"
+                </button>
+                <table class="aui">
+                   <thead>
+                      <tr>
+                         <th id="date">Datum</th>
+
+                         <th id="child-fullname">Příjmení, Jméno (Dítě)</th>
+                         <th id="child-birthday">Narození (Dítě)</th>
+                         <th id="child-address">Ulice, Město,  (Dítě)</th>
+                         <th id="representative-fullname">Příjmení, Jméno (Zákonný zástupce )</th>
+                         <th id="representative-contact">E-mail, Telefon (Zákonný zástupce )</th>
+                         <th id="delete-action">Smazat</th>
+                      </tr>
+                   </thead>
+                   <tbody>
+                      
+                         <tr>
+                            <td headers="date">13.4.2023, 14:00</td>
+                            <td headers="child-fullname">
+                                
+                                    Brych, Antonín
+                                
+                            </td>
+                            <td headers="child-birthday">
+                                
+                                    14.9.2022
+                                
+                            </td>
+                            <td headers="child-address">
+                                
+                                    Šmídkova 5a,  Brno
+                                
+                            </td>
+                            <td headers="representative-fullname">
+                                
+                                    Brych, Jakub
+                                
+                            </td>
+                            <td headers="representative-contact">
+                                
+                                    brychjakub@gmail.com, 732221145
+                                
+                            </td>
+                            <td headers="delete-action">
+                                
+                                    <a href="/admin/booking/100/426/delete/do">
+                                        <span class="csv-export-action aui-icon aui-icon-small aui-iconfont-delete"></span>
+                                    </a>
+                                
+                            </td>
+                         </tr>
+                      
+                         <tr>
+                            <td headers="date">13.4.2023, 14:30</td>
+                            <td headers="child-fullname">
+                                
+                            </td>
+                            <td headers="child-birthday">
+                                
+                            </td>
+                            <td headers="child-address">
+                                
+                            </td>
+                            <td headers="representative-fullname">
+                                
+                            </td>
+                            <td headers="representative-contact">
+                                
+                            </td>
+                            <td headers="delete-action">
+                                
+                            </td>
+                         </tr>
+                      
+                         <tr>
+                            <td headers="date">13.4.2023, 15:00</td>
+                            <td headers="child-fullname">
+                                
+                            </td>
+                            <td headers="child-birthday">
+                                
+                            </td>
+                            <td headers="child-address">
+                                
+                            </td>
+                            <td headers="representative-fullname">
+                                
+                            </td>
+                            <td headers="representative-contact">
+                                
+                            </td>
+                            <td headers="delete-action">
+                                
+                            </td>
+                         </tr>
+                      
+                         <tr>
+                            <td headers="date">13.4.2023, 15:30</td>
+                            <td headers="child-fullname">
+                                
+                            </td>
+                            <td headers="child-birthday">
+                                
+                            </td>
+                            <td headers="child-address">
+                                
+                            </td>
+                            <td headers="representative-fullname">
+                                
+                            </td>
+                            <td headers="representative-contact">
+                                
+                            </td>
+                            <td headers="delete-action">
+                                
+                            </td>
+                         </tr>
+                      
+                         <tr>
+                            <td headers="date">13.4.2023, 16:00</td>
+                            <td headers="child-fullname">
+                                
+                            </td>
+                            <td headers="child-birthday">
+                                
+                            </td>
+                            <td headers="child-address">
+                                
+                            </td>
+                            <td headers="representative-fullname">
+                                
+                            </td>
+                            <td headers="representative-contact">
+                                
+                            </td>
+                            <td headers="delete-action">
+                                
+                            </td>
+                         </tr>
+                      
+                         <tr>
+                            <td headers="date">13.4.2023, 16:30</td>
+                            <td headers="child-fullname">
+                                
+                            </td>
+                            <td headers="child-birthday">
+                                
+                            </td>
+                            <td headers="child-address">
+                                
+                            </td>
+                            <td headers="representative-fullname">
+                                
+                            </td>
+                            <td headers="representative-contact">
+                                
+                            </td>
+                            <td headers="delete-action">
+                                
+                            </td>
+                         </tr>
+                      
+                         <tr>
+                            <td headers="date">13.4.2023, 17:00</td>
+                            <td headers="child-fullname">
+                                
+                            </td>
+                            <td headers="child-birthday">
+                                
+                            </td>
+                            <td headers="child-address">
+                                
+                            </td>
+                            <td headers="representative-fullname">
+                                
+                            </td>
+                            <td headers="representative-contact">
+                                
+                            </td>
+                            <td headers="delete-action">
+                                
+                            </td>
+                         </tr>
+                      
+                         <tr>
+                            <td headers="date">13.4.2023, 17:30</td>
+                            <td headers="child-fullname">
+                                
+                            </td>
+                            <td headers="child-birthday">
+                                
+                            </td>
+                            <td headers="child-address">
+                                
+                            </td>
+                            <td headers="representative-fullname">
+                                
+                            </td>
+                            <td headers="representative-contact">
+                                
+                            </td>
+                            <td headers="delete-action">
+                                
+                            </td>
+                         </tr>
+                      
+                   </tbody>
+                </table>
+            
+        </section>
+    </div>
+</div>
+
+
+                    </section>
+                </div>
+    </div>
+    
+<footer role="contentinfo" id="footer">
+	<section class="footer-body" style="background: none">
+		<ul class="atlassian-footer" style="margin-top:30px; margin-bottom: 10px ">
+		    
+			    <li>v. MVP_1.1, 14-04-2018--10-28</li>
+		    
+		</ul>
+	</section>
+</footer>
+
+</body>
+</html>

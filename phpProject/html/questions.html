@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>User Information</title>
+</head>
+<body>
+    <h1>User Information</h1>
+    <form action="submit.php" method="POST">
+        <div class="field-group">
+            <label for="childFirstname">Jméno<span class="aui-icon icon-required"> required</span></label>
+            <input class="text" type="text" id="childFirstname" name="childFirstname" required>
+            <div class="description">Jméno (Dítě)</div>
+        </div>
+
+        <div class="field-group">
+            <label for="childSurname">Příjmení<span class="aui-icon icon-required"> required</span></label>
+            <input class="text" type="text" id="childSurname" name="childSurname" required>
+            <div class="description">Příjmení (Dítě)</div>
+        </div>
+
+        <div class="field-group">
+            <label for="childBirthDay">Narození<span class="aui-icon icon-required"> required</span></label>
+            <input class="text" type="text" id="childBirthDay" name="childBirthDay" value="dd.mm.rrrr" required>
+            <div class="description">Narození (Dítě). Datum je ve formátu dd.mm.rrrr</div>
+        </div>
+
+        <div class="field-group">
+            <label for="childHomeAddressStreet">Ulice<span class="aui-icon icon-required"> required</span></label>
+            <input class="text" type="text" id="childHomeAddressStreet" name="childHomeAddressStreet" required>
+            <div class="description">Ulice (Dítě)</div>
+        </div>
+
+        <div class="field-group">
+            <label for="childHomeAddressNumber">Orientační číslo<span class="aui-icon icon-required"> required</span></label>
+            <input class="text" type="text" id="childHomeAddressNumber" name="childHomeAddressNumber" required>
+            <div class="description">Orientační číslo (Dítě)</div>
+        </div>
+
+        <div class="field-group">
+            <label for="childHomeAddressCity">Město<span class="aui-icon icon-required"> required</span></label>
+            <input class="text" type="text" id="childHomeAddressCity" name="childHomeAddressCity" required>
+            <div class="description">Město (Dítě)</div>
+        </div>
+
+        <div class="field-group">
+            <label for="childHomeAddressPostcode">PSČ<span class="aui-icon icon-required"> required</span></label>
+            <input class="text" type="text" id="childHomeAddressPostcode" name="childHomeAddressPostcode" required>
+            <div class="description">PSČ (Dítě)</div>
+        </div>
+
+        <h3>Podrobnosti zákonného zástupce</h3>
+        <fieldset class="group">
+            <legend><span>Shodné bydliště</span></legend>
+            <div class="checkbox">
+                <input class="checkbox" type="checkbox" name="sameAddress" id="sameAddress">
+                <label for="same
+
+Address">&nbsp;</label>
+            </div>
+            <div class="description">Zákonný zástupce má shodné bydliště jako dítě</div>
+        </fieldset>
+
+        <fieldset>
+            <div class="field-group">
+                <label for="legalRepresentativeFirstname">Jméno<span class="aui-icon icon-required"> required</span></label>
+                <input class="text" type="text" id="legalRepresentativeFirstname" name="legalRepresentativeFirstname" required>
+                <div class="description">Jméno (Zákonný zástupce)</div>
+            </div>
+
+            <div class="field-group">
+                <label for="legalRepresentativeSurname">Příjmení<span class="aui-icon icon-required"> required</span></label>
+                <input class="text" type="text" id="legalRepresentativeSurname" name="legalRepresentativeSurname" required>
+                <div class="description">Příjmení (Zákonný zástupce)</div>
+            </div>
+
+            <div class="field-group">
+                <label for="legalRepresentativeEmail">E-mail<span class="aui-icon icon-required"> required</span></label>
+                <input class="text" type="text" id="legalRepresentativeEmail" name="legalRepresentativeEmail" required>
+                <div class="description">E-mail (Zákonný zástupce)</div>
+            </div>
+
+            <div class="field-group">
+                <label for="legalRepresentativePhone">Telefon<span class="aui-icon icon-required"> required</span></label>
+                <input class="text" type="text" id="legalRepresentativePhone" name="legalRepresentativePhone" required>
+                <div class="description">Telefon (Zákonný zástupce)</div>
+            </div>
+
+            <div class="field-group">
+                <label for="legalRepresentativeHomeAddressStreet">Ulice<span class="aui-icon icon-required"> required</span></label>
+                <input class="text" type="text" id="legalRepresentativeHomeAddressStreet" name="legalRepresentativeHomeAddressStreet" required>
+                <div class="description">Ulice (Zákonný zástupce)</div>
+            </div>
+
+            <div class="field-group">
+                <label for="legalRepresentativeHomeAddressNumber">Orientační číslo<span class="aui-icon icon-required"> required</span></label>
+                <input class="text" type="text" id="legalRepresentativeHomeAddressNumber" name="legalRepresentativeHomeAddressNumber" required>
+                <div class="description">Orientační číslo (Zákonný zástupce)</div>
+            </div>
+
+            <div class="field-group">
+                <label for="legalRepresentativeHomeAddressCity">Město<span class="aui-icon icon-required"> required</span></label>
+                <input class="text" type="text" id="legalRepresentativeHomeAddressCity" name="legalRepresentativeHomeAddressCity" required>
+                <div class="description">Město (Zákonný zástupce)</div>
+            </div>
+
+            <div class="field-group">
+                <label for="legalRepresentativeHomeAddressPostcode">PSČ<span class="aui-icon icon-required"> required</span></label>
+                <input class="text" type="text" id="legalRepresentativeHomeAddressPostcode" name="legalRepresentativeHome
+
+AddressPostcode" required>
+                <div class="description">PSČ (Zákonný zástupce)</div>
+            </div>
+
+            <div class="field-group">
+                <label for="note">Poznámka</label>
+                <textarea class="textarea" type="text" id="note" name="note"></textarea>
+                <div class="description">Poznámka (Zákonný zástupce), 256 Maximální počet znaků</div>
+            </div>
+        </fieldset>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+

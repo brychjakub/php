@@ -44,9 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
     <title>Login Page</title>
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <?php if (isset($errorMessage)) : ?>

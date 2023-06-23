@@ -19,13 +19,13 @@ try {
 
     // Check if the user 'kuba' already exists
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
-    $stmt->execute(['username' => 'admin']);
+    $stmt->execute(['username' => 'user1']);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
         // User doesn't exist, insert the new user record
-        $username = 'admin';
-        $password = '';
+        $username = 'user1';
+        $password = 'hello2020';
 
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);

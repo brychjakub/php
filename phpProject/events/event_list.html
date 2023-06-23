@@ -1,0 +1,508 @@
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Rezervace CMcZŠ</title>
+
+    
+
+
+<link rel="stylesheet" href="/static/aui/css/aui.css" media="all"/>
+<script type="text/javascript" src="/static/jquery/jquery-min.js"></script>
+<script type="text/javascript" src="/static/aui/js/aui.js"></script>
+<script type="text/javascript" src="/static/aui/js/aui-soy.js"></script>
+<script type="text/javascript" src="/static/aui/js/aui-experimental.js"></script>
+<script type="text/javascript" src="/static/aui/js/aui-datepicker.js"></script>
+
+<script type="text/javascript">
+    AJS.contextPath = function() {
+        return '';
+    }
+    AJS.$(document).ready(function() {
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+</head>
+<body class="aui-layout aui-theme-default" id="page">
+    <div id="page">
+        
+
+
+
+<header id="header" role="banner">
+   <!-- App Header goes inside #header -->
+   <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+      <div class="aui-header-primary">
+        
+
+         <h4 id="logo" class="aui-header-logo aui-header-logo-textonly">
+            <img src="/static/cust/cmzs/img/01.png" style="padding-right: 20px"/>
+            <span class="aui-header-logo-device" style="color: #f2f2f2">Cyrilometodějská církevní základní škola Brno</span>
+         </h4>
+
+
+      </div>
+      <div class="aui-header-secondary">
+
+               
+         <ul class="aui-nav">
+         <li><h1 style="color: #f2f2f2">Rezervační systém</h1></li>
+            <li>
+               <a href="#dropdown2-header9" aria-owns="dropdown2-header9" aria-haspopup="true" class="aui-dropdown2-trigger" aria-controls="dropdown2-header9">
+                  <div class="aui-avatar aui-avatar-small">
+                     <div class="aui-avatar-inner">
+                        <img src="/static/img/user-avatar-16.png"/>
+                     </div>
+                  </div>
+               </a>
+                   <div class="aui-dropdown2 aui-style-default aui-dropdown2-in-header" id="dropdown2-header9" style="display: none; top: 40px; min-width: 160px; left: 1213px;" aria-hidden="true">
+                      <div class="aui-dropdown2-section">
+                         <ul>
+                            <li><a href="/logout">Log out</a></li>
+                         </ul>
+                      </div>
+                   </div>
+            </li>
+         </ul>
+      </div>
+               
+   </nav>
+   <!-- App Header goes inside #header -->
+</header>
+                <div id="page">
+                    <section id="content" role="main">
+                        
+
+
+<!-- Page Header must go inside #content before .aui-page-panel -->
+<div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+        
+
+        <div class="aui-page-panel-nav">
+        <!-- Vertical Nav is usually placed inside .aui-page-panel-nav. Refer to content layout documentation for details. -->
+
+            <nav class="aui-navgroup aui-navgroup-vertical">
+                <div class="aui-navgroup-inner">
+                    <ul class="aui-nav">
+                        <li class="aui-nav-selected"><a href="http://example.com/">Administrace</a></li>
+                    </ul>
+                    <div class="aui-nav-heading"><strong>Události</strong></div>
+                    <ul class="aui-nav">
+                        <li><a href="/admin/event/list">Seznam událostí</a></li>
+                        <li><a href="/admin/event/create/view">Vytvoř novou událost</a></li>
+                    </ul>
+                </div>
+            </nav>
+        <!-- Vertical Nav is usually placed inside aui-page-panel-nav -->
+        </div>
+        <section class="aui-page-panel-content">
+            
+            
+            
+            
+            <h2>Seznam událostí</h2>
+                
+                    
+                    
+                        <table class="aui">
+                            <thead>
+                                <tr>
+                                    <th id="event-name">Událost</th>
+                                    <th id="event-date">Datum</th>
+                                    <th id="event-link">Odkaz</th>
+                                    <th id="event-edit">Editace</th>
+                                    <th id="event-capacity">Kapacita</th>
+                                    <th id="event-state">Stav</th>
+                                    <th id="event-delete">Smazat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/100/overview/view">Zápis 13.4.2023 - Komise 1</a></td>
+                                    <td headers="event-date">13.4.2023, 14:00 - 13.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/100/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/100/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">1/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/100/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/101/overview/view">Zápis 13.4.2023 - Komise 2</a></td>
+                                    <td headers="event-date">13.4.2023, 14:00 - 13.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/101/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/101/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">8/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/101/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/102/overview/view">Zápis 13.4.2023 - Komise 3</a></td>
+                                    <td headers="event-date">13.4.2023, 14:00 - 13.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/102/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/102/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">8/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/102/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/103/overview/view">Zápis 13.4.2023 - Komise 4</a></td>
+                                    <td headers="event-date">13.4.2023, 14:00 - 13.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/103/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/103/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">8/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/103/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/104/overview/view">Zápis 13.4.2023 - Komise 5</a></td>
+                                    <td headers="event-date">13.4.2023, 14:00 - 13.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/104/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/104/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">8/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/104/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/105/overview/view">Zápis 13.4.2023 - Komise 6</a></td>
+                                    <td headers="event-date">13.4.2023, 14:00 - 13.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/105/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/105/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">8/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/105/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/106/overview/view">Zápis 14.4.2023 - Komise 1</a></td>
+                                    <td headers="event-date">14.4.2023, 14:00 - 14.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/106/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/106/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">8/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/106/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/107/overview/view">Zápis 14.4.2023 - Komise 2</a></td>
+                                    <td headers="event-date">14.4.2023, 14:00 - 14.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/107/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/107/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">8/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/107/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/108/overview/view">Zápis 14.4.2023 - Komise 3</a></td>
+                                    <td headers="event-date">14.4.2023, 14:00 - 14.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/108/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/108/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">8/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/108/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/109/overview/view">Zápis 14.4.2023 - Komise 4</a></td>
+                                    <td headers="event-date">14.4.2023, 14:00 - 14.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/109/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/109/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">5/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/109/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/110/overview/view">Zápis 14.4.2023 - Komise 5</a></td>
+                                    <td headers="event-date">14.4.2023, 14:00 - 14.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/110/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/110/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">7/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/110/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                                <tr>
+                                    <td headers="event-name"><a href="/admin/event/111/overview/view">Zápis 14.4.2023 - Komise 6</a></td>
+                                    <td headers="event-date">14.4.2023, 14:00 - 14.4.2023, 18:00</td>
+                                    <td headers="event-link">
+                                        <a href="/user/event/111/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-link"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-edit">
+                                        <a href="/admin/event/edit/111/view">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-edit"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                    <td headers="event-capacity">7/8</td>
+                                    <td headers="event-state">
+                                        
+                                            
+                                               Otevřeno
+                                            
+                                            
+                                        
+                                    </td>
+                                    <td headers="event-delete">
+                                        <a href="/admin/event/111/delete/do">
+                                            <span class="aui-icon aui-icon-small aui-iconfont-delete"><!--Insert meaningful text here for accessibility--></span>
+                                        </a>
+                                    </td>
+                                 </tr>
+                            
+                            </tbody>
+                        </table>
+                    
+                
+        </section>
+    </div>
+</div>
+
+
+                    </section>
+                </div>
+    </div>
+    
+<footer role="contentinfo" id="footer">
+	<section class="footer-body" style="background: none">
+		<ul class="atlassian-footer" style="margin-top:30px; margin-bottom: 10px ">
+		    
+			    <li>v. MVP_1.1, 14-04-2018--10-28</li>
+		    
+		</ul>
+	</section>
+</footer>
+
+</body>
+</html>

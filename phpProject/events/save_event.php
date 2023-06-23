@@ -38,8 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the prepared statement
         $stmt->execute();
 
-        // Display success message
-        echo 'Event saved successfully!';
+        // Redirect to a certain HTML page
+    header('Location: ../event_list/event_list.html');
+    exit(); // Ensure no further code execution
     } catch (PDOException $e) {
         // Display error message
         echo 'Error: ' . $e->getMessage();

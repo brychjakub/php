@@ -15,3 +15,5 @@ ADD COLUMN legalRepresentativeHomeAddressNumber VARCHAR(30) NOT NULL,
 ADD COLUMN legalRepresentativeHomeAddressCity VARCHAR(50) NOT NULL,
 ADD COLUMN legalRepresentativeHomeAddressPostcode VARCHAR(30) NOT NULL,
 ADD COLUMN note TEXT;
+```to be used in mySql Workbench to alter the table."""
+  

@@ -3,6 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>User Information</title>
+    <script>
+        function copyChildAddress() {
+            if (document.getElementById("sameAddress").checked) {
+                // Copy child's address to representative's address
+                document.getElementById("legalRepresentativeHomeAddressStreet").value = document.getElementById("childHomeAddressStreet").value;
+
+                // Copy child's city to representative's city
+                document.getElementById("legalRepresentativeHomeAddressCity").value = document.getElementById("childHomeAddressCity").value;
+
+                // Copy child's postcode to representative's postcode
+                document.getElementById("legalRepresentativeHomeAddressPostcode").value = document.getElementById("childHomeAddressPostcode").value;
+  
+                                // Copy child's postcode to representative's postcode
+                                document.getElementById("legalRepresentativeHomeAddressNumber").value = document.getElementById("childHomeAddressNumber").value;
+            }
+        }
+    </script>
 </head>
 <body>
     <h1>User Information</h1>
@@ -53,10 +70,8 @@
         <fieldset class="group">
             <legend><span>Shodné bydliště</span></legend>
             <div class="checkbox">
-                <input class="checkbox" type="checkbox" name="sameAddress" id="sameAddress">
-                <label for="same
-
-Address">&nbsp;</label>
+                <input class="checkbox" type="checkbox" name="sameAddress" id="sameAddress" onclick="copyChildAddress()">
+                <label for="sameAddress">&nbsp;</label>
             </div>
             <div class="description">Zákonný zástupce má shodné bydliště jako dítě</div>
         </fieldset>

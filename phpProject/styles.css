@@ -141,3 +141,11 @@ p.success-message {
   margin-left: 200px; /* Adjust this value to match the sidebar width */
   padding: 20px;
 }
+.icon-delete {
+  color: red;
+  font-size: 24px;
+}
+
+.icon-delete:hover {
+  cursor: pointer;
+}

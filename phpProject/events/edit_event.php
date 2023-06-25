@@ -1,4 +1,10 @@
 <?php
+if (empty($_GET['edit']) && empty($_POST['eventIdToUpdate'])) {
+    // Redirect to the event list page
+    header('Location: event_list.php');
+    exit();
+}
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data and perform necessary validation
@@ -82,6 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Fetch the event details
         $event = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        if (!$event) {
+            // Redirect to the event list page
+            header('Location: event_list.php');
+            exit();
+        }
+
         // Close the database connection
         $pdo = null;
     } catch (PDOException $e) {
@@ -116,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
     </div>
     <h2>Vytvoř novou událost</h2>
-    <form action="save_event.php" method="post" id="event-create-form-id">
+    <form action="edit_event.php" method="post" id="event-create-form-id">
         <fieldset>
             <div class="field-group">
                 <label for="eventName">Jméno události<span class="required">*</span></label>
@@ -156,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </fieldset>
 
             <!-- Hidden input to store the old event ID -->
-            <input type="hidden" name="eventIdToDelete" value="<?php echo $eventId; ?>">
+            <input type="hidden" name="eventIdToUpdate" value="<?php echo $eventId; ?>">
         </fieldset>
         <div class="buttons-container">
             <div class="buttons">

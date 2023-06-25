@@ -1,9 +1,7 @@
-//anything missing?
-
 <?php
-require 'C:\xampp\htdocs\vendor\phpmailer/src/PHPMailer.php';
-require 'C:\xampp\htdocs\vendor\phpmailer/src/SMTP.php';
-require 'C:\xampp\htdocs\vendor\phpmailer/src/Exception.php';
+require 'C:\xampp\htdocs\vendor\phpmailer\phpmailer\src\PHPMailer.php';
+require 'C:\xampp\htdocs\vendor\phpmailer\phpmailer\src\SMTP.php';
+require 'C:\xampp\htdocs\vendor\phpmailer\phpmailer\src\Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -23,18 +21,23 @@ $mail->Host       = 'smtp.office365.com';
 $mail->SMTPAuth   = true;
 $mail->Username   = 'brych@cmczs.cz';
 $mail->Password   = 'Iphone4S';
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use STARTTLS encryption
 $mail->Port       = 587;
 
 // Set email subject
 $mail->Subject = 'Confirmation Email';
 
 // Set email body
-$mail->Body = 'This is the content of the confirmation email.';
+$mail->Body = 'Dobrý den, mé jméno je Jakub a toto je potvrzovací email.
+
+děkuji za váš čas a přeji hezký den';
 
 // Set recipient(s)
-$mail->addAddress('brychjakub@gmail.com.com', 'Recipient Name');
+$mail->addAddress('brych@cmczs.cz', 'Recipient Name');
 
+$mail->CharSet = 'UTF-8';
+
+$mail->ContentType = 'text/html; charset=UTF-8';
 
 // Send the email
 if ($mail->send()) {

@@ -5,60 +5,50 @@
     <title>Rezervace CMcZŠ</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
-<body class="container">
-    <div class="sidebar">
-        <ul>
-            <li><a href="create_event.html">Vytvořit událost</a></li>
-            <li><a href="event_list.php">Události</a></li>
-            <li><a href="../questions/questions.html">Dotazník</a></li>
-        </ul>
-    </div>
-    <h2>Vytvoř novou událost</h2>
-    <form action="save_event.php" method="post" id="event-create-form-id">
-        <fieldset>
-            <div class="field-group">
-                <label for="eventName">Jméno události<span class="required">*</span></label>
-                <input type="text" id="eventName" name="eventName">
-                <div class="description">Např. 'Zápis do 1.B', 'Třídní schůzky 6. června 2016', atd.</div>
-            </div>
-            <div class="field-group">
-                <label for="startDate">Datum začátku<span class="required">*</span></label>
-                <input type="date" id="startDate" name="startDate">
-                <div class="description">Začátek nesmí být v minulosti. Datum je ve formátu mm/dd/rrrr (např. 12/21/2012).</div>
-            </div>
-            <div class="field-group">
-                <label for="startTime">Čas začátku<span class="required">*</span></label>
-                <input type="text" id="startTime" name="startTime">
-            </div>
-            <div class="field-group">
-                <label for="endDate">Datum konce<span class="required">*</span></label>
-                <input type="date" id="endDate" name="endDate">
-                <div class="description">Datum konce. Datum je ve formátu mm/dd/rrrr (např. 12/21/2012)</div>
-            </div>
-            <div class="field-group">
-                <label for="endTime">Čas konce<span class="required">*</span></label>
-                <input type="text" id="endTime" name="endTime">
-            </div>
-            <div class="field-group">
-                <label for="bookingPeriod">Interval<span class="required">*</span></label>
-                <input type="text" id="bookingPeriod" name="bookingPeriod">
-                <div class="description">Interval (v minutách) určující frekvenci rezervačních oken</div>
-            </div>
-            <fieldset class="group">
-                <legend>Otevřeno</legend>
-                <div class="checkbox">
-                    <input type="checkbox" name="eventOpen" id="eventOpen">
-                    <label for="eventOpen"></label>
-                </div>
-                <div class="description">Uzavřené události se nezobrazují uživatelům a nepovolují vytvářet další rezervace</div>
-            </fieldset>
-        </fieldset>
-        <div class="buttons-container">
-            <div class="buttons">
-                <input type="submit" value="Uložit">
-               <a href="event_list.php">Zrušit</a>
-            </div>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="create_event.html">Vytvořit událost</a></li>
+                <li><a href="event_list.php">Události</a></li>
+                <li><a href="../questions/questions.html">Dotazník</a></li>
+            </ul>
         </div>
-    </form>
+        <div class="content">
+            <h2>Seznam událostí</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Název</th>
+                        <th>Vytvořeno</th>
+                        <th>Úprava</th>
+                        <th>Stav</th>
+                        <th>Smazat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($events as $event): ?>
+                        <tr>
+                            <td><a href="<?php echo $event['id']; ?>/overview/view"><?php echo $event['eventName']; ?></a></td>
+                            <td><?php echo $event['startDate']; ?> - <?php echo $event['endDate']; ?></td>
+                            <td>
+                                <a href="edit_event.php?edit=<?php echo $event['id']; ?>/view">
+                                    <span class="icon-edit">✏️</span>
+                                </a>
+                            </td>
+                            <td>
+                                <?php echo ($event['eventOpen'] ? 'Otevřeno' : 'Uzavřeno'); ?>
+                            </td>
+                            <td>
+                                <a href="delete_event.php?delete=<?php echo $event['id']; ?>" onclick="return confirm('Are you sure you want to delete this event?');">
+                                    <span class="icon-delete">🗑️</span>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

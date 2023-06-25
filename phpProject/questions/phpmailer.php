@@ -1,27 +1,45 @@
+//anything missing?
+
 <?php
-require 'path/to/PHPMailer/PHPMailerAutoload.php';
+require 'C:\xampp\htdocs\vendor\phpmailer/src/PHPMailer.php';
+require 'C:\xampp\htdocs\vendor\phpmailer/src/SMTP.php';
+require 'C:\xampp\htdocs\vendor\phpmailer/src/Exception.php';
 
-$mail = new PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-// Set SMTP settings
+// Instantiate PHPMailer
+$mail = new PHPMailer(true);
+
+// Enable verbose debug output (optional)
+$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+
+// Set the mailer to use SMTP
 $mail->isSMTP();
-$mail->Host = 'smtp.office365.com';  // Replace with the SMTP server address provided by Microsoft
-$mail->Port = 587;  // Replace with the SMTP port number provided by Microsoft
-$mail->SMTPSecure = 'tls';
-$mail->SMTPAuth = true;
-$mail->Username = 'your-email@example.com';  // Replace with your email address
-$mail->Password = 'your-email-password';  // Replace with your email password
 
-// Set email content
-$mail->setFrom('your-email@example.com', 'Your Name');
-$mail->addAddress('recipient@example.com', 'Recipient Name');
-$mail->Subject = 'Subject of the Email';
-$mail->Body = 'Email body content';
+// Configure SMTP settings
+$mail->Host       = 'smtp.office365.com';
+$mail->SMTPAuth   = true;
+$mail->Username   = 'brych@cmczs.cz';
+$mail->Password   = 'Iphone4S';
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+$mail->Port       = 587;
+
+// Set email subject
+$mail->Subject = 'Confirmation Email';
+
+// Set email body
+$mail->Body = 'This is the content of the confirmation email.';
+
+// Set recipient(s)
+$mail->addAddress('brychjakub@gmail.com.com', 'Recipient Name');
+
 
 // Send the email
-if (!$mail->send()) {
-    echo 'Error sending email: ' . $mail->ErrorInfo;
+if ($mail->send()) {
+    echo 'Confirmation email sent successfully.';
 } else {
-    echo 'Email sent successfully!';
+    echo 'Error sending confirmation email: ' . $mail->ErrorInfo;
 }
 ?>

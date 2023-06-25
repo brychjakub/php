@@ -73,41 +73,71 @@ p.success-message {
 }
 
 /* Additional styles */
-.aui-page-panel {
+.page-panel {
   background-color: #f5fcf9;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.aui-page-panel h2 {
+.page-panel h2 {
   color: #004500;
 }
 
-.aui-page-panel table {
+.page-panel table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
 
-.aui-page-panel th,
-.aui-page-panel td {
+.page-panel th,
+.page-panel td {
   padding: 10px;
   border-bottom: 1px solid #ccc;
 }
 
-.aui-page-panel th {
+.page-panel th {
   background-color: #dff0d8;
 }
 
-.aui-page-panel tbody tr:nth-child(even) {
+.page-panel tbody tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.aui-page-panel tbody tr:hover {
+.page-panel tbody tr:hover {
   background-color: #e0f7e4;
 }
 
-.aui-page-panel a {
+.page-panel a {
   color: #006600;
+}
+
+.sidebar {
+  width: 200px;
+  background: #f1f1f1;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.content {
+  margin-left: 200px; /* Adjust this value to match the sidebar width */
+  padding: 20px;
 }

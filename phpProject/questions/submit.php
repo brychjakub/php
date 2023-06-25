@@ -38,7 +38,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare the SQL statement
-        $stmt = $pdo->prepare('INSERT INTO users (firstname, lastname, childBirthDay, 
+        $stmt = $pdo->prepare('INSERT INTO pupils (firstname, lastname, childBirthDay, 
         childHomeAddressStreet, childHomeAddressNumber, childHomeAddressCity, 
         childHomeAddressPostcode, legalRepresentativeFirstname, legalRepresentativeSurname, legalRepresentativeEmail, legalRepresentativePhone, legalRepresentativeHomeAddressStreet, 
         legalRepresentativeHomeAddressNumber, legalRepresentativeHomeAddressCity, legalRepresentativeHomeAddressPostcode, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
@@ -62,15 +62,16 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $stmt->bindParam(16, $note);
 
 
-
-
-        
-
         // Execute the prepared statement
         $stmt->execute();
 
         // Display success message
-        echo 'Data saved successfully!';
+        // Execute the prepared statement
+$stmt->execute();
+
+// Redirect to the message.html page
+header("Location: message.html");
+exit();
     } catch (PDOException $e) {
         // Display error message
         echo 'Error: ' . $e->getMessage();

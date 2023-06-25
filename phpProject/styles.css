@@ -1,0 +1,143 @@
+/* Example styles for required fields */
+.required {
+  color: red;
+}
+
+/* Example styles for form fields */
+.field-group {
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+.input-text {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Add more styles as needed */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+p.success-message {
+  color: green;
+}
+
+.form-table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-table td {
+  padding: 10px;
+}
+
+.form-table input[type="text"],
+.form-table input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-table input[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.form-table input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Additional styles */
+.page-panel {
+  background-color: #f5fcf9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-panel h2 {
+  color: #004500;
+}
+
+.page-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.page-panel th,
+.page-panel td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.page-panel th {
+  background-color: #dff0d8;
+}
+
+.page-panel tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.page-panel tbody tr:hover {
+  background-color: #e0f7e4;
+}
+
+.page-panel a {
+  color: #006600;
+}
+
+.sidebar {
+  width: 200px;
+  background: #f1f1f1;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+.content {
+  margin-left: 200px; /* Adjust this value to match the sidebar width */
+  padding: 20px;
+}

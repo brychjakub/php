@@ -7,42 +7,70 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// Instantiate PHPMailer
-$mail = new PHPMailer(true);
+// Database credentials
+$dbHost     = 'localhost';
+$dbUsername = 'root';
+$dbPassword = '';  // your db password
+$dbName     = 'first_db';    // your db name
 
-// Enable verbose debug output (optional)
-$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+try {
+    // Create a new PDO instance
+    $conn = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUsername, $dbPassword);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Set the mailer to use SMTP
-$mail->isSMTP();
+    // Get the last inserted row from the pupils table
+    $sql = "SELECT legalRepresentativeEmail FROM pupils ORDER BY id DESC LIMIT 1";
+    $stmt = $conn->query($sql);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Configure SMTP settings
-$mail->Host       = 'smtp.office365.com';
-$mail->SMTPAuth   = true;
-$mail->Username   = 'brych@cmczs.cz';
-$mail->Password   = 'Iphone4S';
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use STARTTLS encryption
-$mail->Port       = 587;
+    // Instantiate PHPMailer
+    $mail = new PHPMailer(true);
 
-// Set email subject
-$mail->Subject = 'Confirmation Email';
+    // Enable verbose debug output (optional)
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
 
-// Set email body
-$mail->Body = 'Dobrý den, mé jméno je Jakub a toto je potvrzovací email.
+    // Set the mailer to use SMTP
+    $mail->isSMTP();
 
-děkuji za váš čas a přeji hezký den';
+    // Configure SMTP settings
+    $mail->Host       = 'smtp.office365.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'brych@cmczs.cz';
+    $mail->Password   = 'Iphone4S';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use STARTTLS encryption
+    $mail->Port       = 587;
 
-// Set recipient(s)
-$mail->addAddress('brych@cmczs.cz', 'Recipient Name');
+    // Set email subject
 
-$mail->CharSet = 'UTF-8';
+    $mail->setFrom('brych@cmczs.cz', 'Jakub');
 
-$mail->ContentType = 'text/html; charset=UTF-8';
+    $mail->Subject = 'Potvrzení zápisu';
 
-// Send the email
-if ($mail->send()) {
-    echo 'Confirmation email sent successfully.';
-} else {
-    echo 'Error sending confirmation email: ' . $mail->ErrorInfo;
+    // Set email body
+    $mail->Body = 'Dobrý den,
+
+toto jsou informace, které jste použili během zápisu.
+
+Děkujeme za váš čas.
+
+S pozdravem,
+Jakub';
+
+
+    // Set recipient(s)
+    $mail->addAddress($row['legalRepresentativeEmail'], 'Recipient Name');
+
+    $mail->CharSet = 'UTF-8';
+    $mail->ContentType = 'text/plain'; // Sending as plain text
+
+    // Send the email
+    if ($mail->send()) {
+        echo 'Confirmation email sent successfully to ' . $row['legalRepresentativeEmail'] . '.';
+    } else {
+        echo 'Error sending confirmation email to ' . $row['legalRepresentativeEmail'] . ': ' . $mail->ErrorInfo;
+    }
+} catch(PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
 }
 ?>

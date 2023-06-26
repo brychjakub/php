@@ -68,6 +68,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         // Display success message
         // Execute the prepared statement
 $stmt->execute();
+include 'phpmailer.php';
 
 // Redirect to the message.html page
 header("Location: message.html");

@@ -1,27 +1,48 @@
 <?php
-require 'path/to/PHPMailer/PHPMailerAutoload.php';
+require 'C:\xampp\htdocs\vendor\phpmailer\phpmailer\src\PHPMailer.php';
+require 'C:\xampp\htdocs\vendor\phpmailer\phpmailer\src\SMTP.php';
+require 'C:\xampp\htdocs\vendor\phpmailer\phpmailer\src\Exception.php';
 
-$mail = new PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-// Set SMTP settings
+// Instantiate PHPMailer
+$mail = new PHPMailer(true);
+
+// Enable verbose debug output (optional)
+$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+
+// Set the mailer to use SMTP
 $mail->isSMTP();
-$mail->Host = 'smtp.office365.com';  // Replace with the SMTP server address provided by Microsoft
-$mail->Port = 587;  // Replace with the SMTP port number provided by Microsoft
-$mail->SMTPSecure = 'tls';
-$mail->SMTPAuth = true;
-$mail->Username = 'your-email@example.com';  // Replace with your email address
-$mail->Password = 'your-email-password';  // Replace with your email password
 
-// Set email content
-$mail->setFrom('your-email@example.com', 'Your Name');
-$mail->addAddress('recipient@example.com', 'Recipient Name');
-$mail->Subject = 'Subject of the Email';
-$mail->Body = 'Email body content';
+// Configure SMTP settings
+$mail->Host       = 'smtp.office365.com';
+$mail->SMTPAuth   = true;
+$mail->Username   = 'brych@cmczs.cz';
+$mail->Password   = 'Iphone4S';
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use STARTTLS encryption
+$mail->Port       = 587;
+
+// Set email subject
+$mail->Subject = 'Confirmation Email';
+
+// Set email body
+$mail->Body = 'Dobrý den, mé jméno je Jakub a toto je potvrzovací email.
+
+děkuji za váš čas a přeji hezký den';
+
+// Set recipient(s)
+$mail->addAddress('brych@cmczs.cz', 'Recipient Name');
+
+$mail->CharSet = 'UTF-8';
+
+$mail->ContentType = 'text/html; charset=UTF-8';
 
 // Send the email
-if (!$mail->send()) {
-    echo 'Error sending email: ' . $mail->ErrorInfo;
+if ($mail->send()) {
+    echo 'Confirmation email sent successfully.';
 } else {
-    echo 'Email sent successfully!';
+    echo 'Error sending confirmation email: ' . $mail->ErrorInfo;
 }
 ?>

@@ -20,7 +20,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Get the last inserted row from the pupils table
-    $sql = "SELECT legalRepresentativeEmail FROM pupils ORDER BY id DESC LIMIT 1";
+    $sql = "SELECT legalRepresentativeEmail, firstname, lastname, childBirthDay, childHomeAddressStreet, childHomeAddressNumber, childHomeAddressCity, childHomeAddressPostcode, legalRepresentativeFirstname, legalRepresentativeSurname, legalRepresentativePhone, legalRepresentativeHomeAddressStreet, legalRepresentativeHomeAddressNumber, legalRepresentativeHomeAddressCity, legalRepresentativeHomeAddressPostcode, note FROM pupils ORDER BY id DESC LIMIT 1";
     $stmt = $conn->query($sql);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -50,12 +50,22 @@ try {
     // Set email body
     $mail->Body = 'Dobrý den,
 
-toto jsou informace, které jste použili během zápisu.
-
-Děkujeme za váš čas.
-
-S pozdravem,
-Jakub';
+    toto jsou informace, které jste použili během zápisu.
+    
+    Jméno: ' . $firstname . '
+    Příjmení: ' . $lastname . '
+    Datum narození: ' . $childBirthDay . '
+    Adresa dítěte: ' . $childHomeAddressStreet . ' ' . $childHomeAddressNumber . ', ' . $childHomeAddressCity . ', ' . $childHomeAddressPostcode . '
+    Jméno zákonného zástupce: ' . $legalRepresentativeFirstname . ' ' . $legalRepresentativeSurname . '
+    Email zákonného zástupce: ' . $legalRepresentativeEmail . '
+    Telefon zákonného zástupce: ' . $legalRepresentativePhone . '
+    Adresa zákonného zástupce: ' . $legalRepresentativeHomeAddressStreet . ' ' . $legalRepresentativeHomeAddressNumber . ', ' . $legalRepresentativeHomeAddressCity . ', ' . $legalRepresentativeHomeAddressPostcode . '
+    Poznámka: ' . $note . '
+    
+    Děkujeme za váš čas.
+    
+    S pozdravem,
+    Jakub';
 
 
     // Set recipient(s)

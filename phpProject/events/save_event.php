@@ -5,7 +5,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $eventName = $_POST['eventName'];
     $startDate = $_POST['startDate'];
     $startTime = $_POST['startTime'];
-    $endDate = $_POST['endDate'];
     $endTime = $_POST['endTime'];
     $bookingPeriod = $_POST['bookingPeriod'];
     $eventOpen = isset($_POST['eventOpen']) ? 1 : 0;
@@ -24,23 +23,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare the SQL statement
-        $stmt = $pdo->prepare('INSERT INTO events (eventName, startDate, startTime, endDate, endTime, bookingPeriod, eventOpen) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $stmt = $pdo->prepare('INSERT INTO events (eventName, startDate, startTime, endTime, bookingPeriod, eventOpen, openPositions) VALUES (?, ?, ?, ?, ?, ?, ?)');
 
-        // Bind the form data to the prepared statement
+        // Calculate the open positions
+        $startDateTime = new DateTime($startDate . ' ' . $startTime);
+        $endDateTime = new DateTime($startDate . ' ' . $endTime);
+        $interval = $startDateTime->diff($endDateTime);
+        $totalMinutes = ($interval->h * 60) + $interval->i;
+        $openPositions = floor($totalMinutes / $bookingPeriod);
+
+        // Bind the form data and calculated open positions to the prepared statement
         $stmt->bindParam(1, $eventName);
         $stmt->bindParam(2, $startDate);
         $stmt->bindParam(3, $startTime);
-        $stmt->bindParam(4, $endDate);
-        $stmt->bindParam(5, $endTime);
-        $stmt->bindParam(6, $bookingPeriod);
-        $stmt->bindParam(7, $eventOpen);
+        $stmt->bindParam(4, $endTime);
+        $stmt->bindParam(5, $bookingPeriod);
+        $stmt->bindParam(6, $eventOpen);
+        $stmt->bindParam(7, $openPositions);
 
         // Execute the prepared statement
         $stmt->execute();
 
         // Redirect to a certain HTML page
-    header('Location: event_list.php');
-    exit(); // Ensure no further code execution
+        header('Location: event_list.php');
+        exit(); // Ensure no further code execution
     } catch (PDOException $e) {
         // Display error message
         echo 'Error: ' . $e->getMessage();

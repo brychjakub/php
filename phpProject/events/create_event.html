@@ -17,35 +17,31 @@
     <form action="save_event.php" method="post" id="event-create-form-id">
         <fieldset>
             <div class="field-group">
-                <label for="eventName">Jméno události<span class="required">*</span></label>
-                <input type="text" id="eventName" name="eventName">
-                <div class="description">Např. 'Zápis do 1.B', 'Třídní schůzky 6. června 2016', atd.</div>
+                <label for="eventName">Jméno události</label>
+                <input type="text" id="eventName" name="eventName" required>
+                <div class="description">Např. 'Zápis do 1.B'.</div>
             </div>
             <div class="field-group">
-                <label for="startDate">Datum začátku<span class="required">*</span></label>
-                <input type="date" id="startDate" name="startDate">
+                <label for="startDate">Datum začátku</label>
+                <input type="date" id="startDate" name="startDate" required>
                 <div class="description">Začátek nesmí být v minulosti. Datum je ve formátu mm/dd/rrrr (např. 12/21/2012).</div>
             </div>
             <div class="field-group">
-                <label for="startTime">Čas začátku<span class="required">*</span></label>
-                <input type="text" id="startTime" name="startTime">
+                <label for="startTime">Čas začátku</label>
+                <input type="text" id="startTime" name="startTime" pattern="^(?:[01]\d|2[0-3]):[0-5]\d$" title="Zadejte čas ve formátu hh:mm" required>
+            </div>
+            
+            <div class="field-group">
+                <label for="endTime">Čas konce</label>
+                <input type="text" id="endTime" name="endTime" pattern="^(?:[01]\d|2[0-3]):[0-5]\d$" title="Zadejte čas ve formátu hh:mm" required>
             </div>
             <div class="field-group">
-                <label for="endDate">Datum konce<span class="required">*</span></label>
-                <input type="date" id="endDate" name="endDate">
-                <div class="description">Datum konce. Datum je ve formátu mm/dd/rrrr (např. 12/21/2012)</div>
-            </div>
-            <div class="field-group">
-                <label for="endTime">Čas konce<span class="required">*</span></label>
-                <input type="text" id="endTime" name="endTime">
-            </div>
-            <div class="field-group">
-                <label for="bookingPeriod">Interval<span class="required">*</span></label>
-                <input type="text" id="bookingPeriod" name="bookingPeriod">
+                <label for="bookingPeriod">Interval</label>
+                <input type="text" id="bookingPeriod" name="bookingPeriod" pattern="\d+" title="Zadejte číslo jako interval (v minutách)" required>
                 <div class="description">Interval (v minutách) určující frekvenci rezervačních oken</div>
             </div>
             <fieldset class="group">
-                <legend>Otevřeno</legend>
+                <legend>Otevřeno pro veřejnost?</legend>
                 <div class="checkbox">
                     <input type="checkbox" name="eventOpen" id="eventOpen">
                     <label for="eventOpen"></label>

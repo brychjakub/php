@@ -60,10 +60,10 @@ $pdo = null;
                 <tbody>
                     <?php foreach ($events as $event): ?>
                         <tr>
-                            <td><a href="<?php echo $event['id']; ?>/overview/view"><?php echo $event['eventName']; ?></a></td>
+                            <td><a href="<?php echo $event['id']; ?>"><?php echo $event['eventName']; ?></a></td>
                             <td><?php echo date('d/m/Y', strtotime($event['startDate'])); ?> ; <?php echo $event['startTime']; ?></td>
                             <td>
-                                <a href="edit_event.php?edit=<?php echo $event['id']; ?>/view">
+                                <a href="edit_event.php?edit=<?php echo $event['id']; ?>">
                                     <span class="icon-edit">✏️</span>
                                 </a>
                             </td>

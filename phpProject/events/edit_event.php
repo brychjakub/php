@@ -7,9 +7,7 @@ if (empty($_GET['edit']) && empty($_POST['eventIdToUpdate'])) {
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the form data and perform necessary validation
-    // ...
-
+    
     // Update the event details in the database
     $eventIdToUpdate = $_POST['eventIdToUpdate'];
     $eventName = $_POST['eventName'];

@@ -1,28 +1,6 @@
 <?php
 // Check if the form is submitted
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the form data
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $childBirthDay = $_POST['childBirthDay'];
-    $childHomeAddressStreet = $_POST['childHomeAddressStreet'];
-    $childHomeAddressNumber = $_POST['childHomeAddressNumber'];
-    $childHomeAddressCity = $_POST['childHomeAddressCity'];
-    $childHomeAddressPostcode = $_POST['childHomeAddressPostcode'];
-    $legalRepresentativeFirstname = $_POST['legalRepresentativeFirstname'];
-    $legalRepresentativeSurname = $_POST['legalRepresentativeSurname'];
-    $legalRepresentativeEmail = $_POST['legalRepresentativeEmail'];
-    $legalRepresentativePhone = $_POST['legalRepresentativePhone'];
-    $legalRepresentativeHomeAddressStreet = $_POST['legalRepresentativeHomeAddressStreet'];
-    $legalRepresentativeHomeAddressNumber = $_POST['legalRepresentativeHomeAddressNumber'];
-    $legalRepresentativeHomeAddressCity = $_POST['legalRepresentativeHomeAddressCity'];
-    $legalRepresentativeHomeAddressPostcode = $_POST['legalRepresentativeHomeAddressPostcode'];
-    $note = $_POST['note'];
-
-    // Get the event ID and slot time from the URL query parameters
-    $eventId = $_GET['eventId'];
-    $slotTime = $_GET['slotTime'];
-
     // Database configuration
     $servername = 'localhost';
     $username = 'root';
@@ -36,11 +14,45 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         // Set PDO error mode to exception
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+        // Get the form data
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $childBirthDay = $_POST['childBirthDay'];
+        $childHomeAddressStreet = $_POST['childHomeAddressStreet'];
+        $childHomeAddressNumber = $_POST['childHomeAddressNumber'];
+        $childHomeAddressCity = $_POST['childHomeAddressCity'];
+        $childHomeAddressPostcode = $_POST['childHomeAddressPostcode'];
+        $legalRepresentativeFirstname = $_POST['legalRepresentativeFirstname'];
+        $legalRepresentativeSurname = $_POST['legalRepresentativeSurname'];
+        $legalRepresentativeEmail = $_POST['legalRepresentativeEmail'];
+        $legalRepresentativePhone = $_POST['legalRepresentativePhone'];
+        $legalRepresentativeHomeAddressStreet = $_POST['legalRepresentativeHomeAddressStreet'];
+        $legalRepresentativeHomeAddressNumber = $_POST['legalRepresentativeHomeAddressNumber'];
+        $legalRepresentativeHomeAddressCity = $_POST['legalRepresentativeHomeAddressCity'];
+        $legalRepresentativeHomeAddressPostcode = $_POST['legalRepresentativeHomeAddressPostcode'];
+        $note = $_POST['note'];
+
+        // Check if the pupil already exists
+        $checkPupilStmt = $pdo->prepare('SELECT COUNT(*) AS pupilCount FROM pupils WHERE firstname = ? AND lastname = ? AND childBirthDay = ?');
+        $checkPupilStmt->bindParam(1, $firstname);
+        $checkPupilStmt->bindParam(2, $lastname);
+        $checkPupilStmt->bindParam(3, $childBirthDay);
+        $checkPupilStmt->execute();
+        $pupilCountResult = $checkPupilStmt->fetch(PDO::FETCH_ASSOC);
+        $pupilCount = $pupilCountResult['pupilCount'];
+
+        if ($pupilCount > 0) {
+            // Redirect to the "sorry.html" page
+            header('Location: sorry.html');
+            exit();
+        }
+
+        // Get the event ID and slot time from the URL query parameters
+        $eventId = $_GET['eventId'];
+        $slotTime = $_GET['slotTime'];
+
         // Prepare the SQL statement to insert pupil data
-        $pupilStmt = $pdo->prepare('INSERT INTO pupils (firstname, lastname, childBirthDay, 
-        childHomeAddressStreet, childHomeAddressNumber, childHomeAddressCity, 
-        childHomeAddressPostcode, legalRepresentativeFirstname, legalRepresentativeSurname, legalRepresentativeEmail, legalRepresentativePhone, legalRepresentativeHomeAddressStreet, 
-        legalRepresentativeHomeAddressNumber, legalRepresentativeHomeAddressCity, legalRepresentativeHomeAddressPostcode, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $pupilStmt = $pdo->prepare('INSERT INTO pupils (firstname, lastname, childBirthDay, childHomeAddressStreet, childHomeAddressNumber, childHomeAddressCity, childHomeAddressPostcode, legalRepresentativeFirstname, legalRepresentativeSurname, legalRepresentativeEmail, legalRepresentativePhone, legalRepresentativeHomeAddressStreet, legalRepresentativeHomeAddressNumber, legalRepresentativeHomeAddressCity, legalRepresentativeHomeAddressPostcode, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
         // Bind the pupil form data to the prepared statement
         $pupilStmt->bindParam(1, $firstname);
@@ -66,17 +78,18 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         // Get the ID of the newly inserted pupil
         $pupilId = $pdo->lastInsertId();
 
-          // Get the current reservation number for the same slot time
-          $maxReservationNumberStmt = $pdo->prepare('SELECT MAX(reservationNumber) AS maxReservationNumber FROM reservations WHERE eventID = ? AND time = ?');
-          $maxReservationNumberStmt->bindParam(1, $eventId);
-          $maxReservationNumberStmt->bindParam(2, $slotTime);
-          $maxReservationNumberStmt->execute();
-          $maxReservationNumberResult = $maxReservationNumberStmt->fetch(PDO::FETCH_ASSOC);
-          $currentReservationNumber = $maxReservationNumberResult['maxReservationNumber'] ?? 0;
-          
-    // Increment the reservation number by 1
-    $newReservationNumber = $currentReservationNumber + 1;
-    // Prepare the SQL statement to insert reservation data
+        // Get the current reservation number for the same slot time
+        $maxReservationNumberStmt = $pdo->prepare('SELECT MAX(reservationNumber) AS maxReservationNumber FROM reservations WHERE eventID = ? AND time = ?');
+        $maxReservationNumberStmt->bindParam(1, $eventId);
+        $maxReservationNumberStmt->bindParam(2, $slotTime);
+        $maxReservationNumberStmt->execute();
+        $maxReservationNumberResult = $maxReservationNumberStmt->fetch(PDO::FETCH_ASSOC);
+        $currentReservationNumber = $maxReservationNumberResult['maxReservationNumber'] ?? 0;
+
+        // Increment the reservation number by 1
+        $newReservationNumber = $currentReservationNumber + 1;
+
+        // Prepare the SQL statement to insert reservation data
         $reservationStmt = $pdo->prepare('INSERT INTO reservations (eventID, time, pupilID, reservationNumber) VALUES (?, ?, ?, ?)');
 
         // Bind the reservation data to the prepared statement

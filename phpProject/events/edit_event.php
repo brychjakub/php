@@ -7,18 +7,18 @@ if (empty($_GET['edit']) && empty($_POST['eventIdToUpdate'])) {
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the form data and perform necessary validation
-    // ...
-
+    
     // Update the event details in the database
     $eventIdToUpdate = $_POST['eventIdToUpdate'];
     $eventName = $_POST['eventName'];
     $startDate = $_POST['startDate'];
     $startTime = $_POST['startTime'];
-    $endDate = $_POST['endDate'];
     $endTime = $_POST['endTime'];
     $bookingPeriod = $_POST['bookingPeriod'];
     $eventOpen = isset($_POST['eventOpen']) ? 1 : 0;
+    
+    // Count the open positions based on start time, end time, and booking period
+    $openPositions = calculateOpenPositions($startTime, $endTime, $bookingPeriod);
     
     // Database configuration
     $servername = 'localhost';
@@ -34,16 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare the SQL statement to update the event data
-        $stmt = $pdo->prepare('UPDATE events SET eventName = ?, startDate = ?, startTime = ?, endDate = ?, endTime = ?, bookingPeriod = ?, eventOpen = ? WHERE id = ?');
+        $stmt = $pdo->prepare('UPDATE events SET eventName = ?, startDate = ?, startTime = ?, endTime = ?, bookingPeriod = ?, eventOpen = ?, openPositions = ? WHERE id = ?');
 
         // Bind the parameters to the prepared statement
         $stmt->bindParam(1, $eventName);
         $stmt->bindParam(2, $startDate);
         $stmt->bindParam(3, $startTime);
-        $stmt->bindParam(4, $endDate);
-        $stmt->bindParam(5, $endTime);
-        $stmt->bindParam(6, $bookingPeriod);
-        $stmt->bindParam(7, $eventOpen);
+        $stmt->bindParam(4, $endTime);
+        $stmt->bindParam(5, $bookingPeriod);
+        $stmt->bindParam(6, $eventOpen);
+        $stmt->bindParam(7, $openPositions);
         $stmt->bindParam(8, $eventIdToUpdate);
 
         // Execute the prepared statement
@@ -106,12 +106,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $eventName = $event['eventName'];
     $startDate = $event['startDate'];
     $startTime = $event['startTime'];
-    $endDate = $event['endDate'];
     $endTime = $event['endTime'];
     $bookingPeriod = $event['bookingPeriod'];
     $eventOpen = $event['eventOpen'];
 }
+
+/**
+ * Calculate the number of open positions based on start time, end time, and booking period.
+ * 
+ * @param string $startTime The start time of the event in the format hh:mm
+ * @param string $endTime The end time of the event in the format hh:mm
+ * @param int $bookingPeriod The booking period in minutes
+ * @return int The number of open positions
+ */
+function calculateOpenPositions($startTime, $endTime, $bookingPeriod) {
+    $start = strtotime($startTime);
+    $end = strtotime($endTime);
+    $interval = $bookingPeriod * 60; // Convert minutes to seconds
+
+    $openPositions = 0;
+    $current = $start;
+    while ($current < $end) {
+        $openPositions++;
+        $current += $interval;
+    }
+
+    return $openPositions;
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,35 +154,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form action="edit_event.php" method="post" id="event-create-form-id">
         <fieldset>
             <div class="field-group">
-                <label for="eventName">Jméno události<span class="required">*</span></label>
-                <input type="text" id="eventName" name="eventName" value="<?php echo $eventName; ?>">
-                <div class="description">Např. 'Zápis do 1.B', 'Třídní schůzky 6. června 2016', atd.</div>
+                <label for="eventName">Jméno události</label>
+                <input type="text" id="eventName" name="eventName" value="<?php echo $eventName; ?>" required>
+                <div class="description">Např. 'Zápis do 1.B'.</div>
             </div>
             <div class="field-group">
-                <label for="startDate">Datum začátku<span class="required">*</span></label>
-                <input type="date" id="startDate" name="startDate" value="<?php echo $startDate; ?>">
+                <label for="startDate">Datum začátku</label>
+                <input type="date" id="startDate" name="startDate" value="<?php echo $startDate; ?>" required>
                 <div class="description">Začátek nesmí být v minulosti. Datum je ve formátu mm/dd/rrrr (např. 12/21/2012).</div>
             </div>
             <div class="field-group">
-                <label for="startTime">Čas začátku<span class="required">*</span></label>
-                <input type="text" id="startTime" name="startTime" value="<?php echo $startTime; ?>">
+                <label for="startTime">Čas začátku</label>
+                <input type="text" id="startTime" name="startTime" value="<?php echo $startTime; ?>" required>
+            </div>
+            
+            <div class="field-group">
+                <label for="endTime">Čas konce</label>
+                <input type="text" id="endTime" name="endTime" value="<?php echo $endTime; ?>" required>
             </div>
             <div class="field-group">
-                <label for="endDate">Datum konce<span class="required">*</span></label>
-                <input type="date" id="endDate" name="endDate" value="<?php echo $endDate; ?>">
-                <div class="description">Datum konce. Datum je ve formátu mm/dd/rrrr (např. 12/21/2012)</div>
-            </div>
-            <div class="field-group">
-                <label for="endTime">Čas konce<span class="required">*</span></label>
-                <input type="text" id="endTime" name="endTime" value="<?php echo $endTime; ?>">
-            </div>
-            <div class="field-group">
-                <label for="bookingPeriod">Interval<span class="required">*</span></label>
-                <input type="text" id="bookingPeriod" name="bookingPeriod" value="<?php echo $bookingPeriod; ?>">
+                <label for="bookingPeriod">Interval</label>
+                <input type="text" id="bookingPeriod" name="bookingPeriod" pattern="\d+" value="<?php echo $bookingPeriod; ?>" required>
                 <div class="description">Interval (v minutách) určující frekvenci rezervačních oken</div>
             </div>
             <fieldset class="group">
-                <legend>Otevřeno</legend>
+                <legend>Otevřeno pro veřejnost?</legend>
                 <div class="checkbox">
                     <input type="checkbox" name="eventOpen" id="eventOpen" <?php echo $eventOpen ? 'checked' : ''; ?>>
                     <label for="eventOpen"></label>
@@ -179,4 +198,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </body>
 </html>
-

@@ -138,3 +138,15 @@ a {
 .icon-delete:hover {
   cursor: pointer;
 }
+.slot-available {
+  color: #000; /* Set the color for available slots */
+}
+
+.slot-unavailable {
+  color: #888; /* Set the color for fully taken slots */
+}
+
+.link-unavailable {
+  pointer-events: none; /* Disable link click for fully taken slots */
+  cursor: not-allowed; /* Set cursor to not-allowed for fully taken slots */
+}

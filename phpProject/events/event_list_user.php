@@ -66,18 +66,60 @@ $pdo = null;
                         <tr id="options-<?php echo $event['id']; ?>" style="display: none;">
     <td colspan="3">
         <?php
-        $startTime = strtotime($event['startTime']);
-        $endTime = strtotime($event['endTime']);
-        $bookingPeriod = $event['bookingPeriod'];
-        $interval = '+' . $bookingPeriod . ' minutes';
-        $capacity = 6;
+        // Database configuration
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'first_db';
 
-        for ($i = 1; $i <= $capacity; $i++) {
-            $slotTime = date('H:i', $startTime);
-            $remainingCapacity = $capacity - $i;
-            echo '<div><a href="../questions/questions.php?eventId=' . $event['id'] . '&slotTime=' . $slotTime . '" onclick="reserveSlot(' . $event['id'] . ', \'' . $slotTime . '\')">' . $slotTime . '</a> (' . $i . '/' . $capacity . ' spots filled)</div>';
-            $startTime = strtotime($interval, $startTime);
-        }
+try {
+    // Create a new PDO instance
+    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+
+    // Set PDO error mode to exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $startTime = strtotime($event['startTime']);
+      $endTime = strtotime($event['endTime']);
+      $bookingPeriod = $event['bookingPeriod'];
+      $interval = '+' . $bookingPeriod . ' minutes';
+      $capacity = 2;
+
+      for ($i = 1; $i <= $capacity; $i++) {
+          $slotTime = date('H:i', $startTime);
+          
+          // Get the maximum reservation number for the event and slot time
+          $maxReservationNumberStmt = $pdo->prepare('SELECT MAX(reservationNumber) AS maxReservationNumber FROM reservations WHERE eventID = ? AND time = ?');
+          $maxReservationNumberStmt->bindParam(1, $event['id']);
+          $maxReservationNumberStmt->bindParam(2, $slotTime);
+          $maxReservationNumberStmt->execute();
+          $maxReservationNumberResult = $maxReservationNumberStmt->fetch(PDO::FETCH_ASSOC);
+          $maxReservationNumber = $maxReservationNumberResult['maxReservationNumber'];
+          $takenSlots = $maxReservationNumber ?? 0;
+
+           // Check if the slots are fully taken
+    $isFullyTaken = $takenSlots >= $capacity;
+ // Display the appropriate slot information
+ if ($isFullyTaken) {
+    echo '<div>Fully Reserved</div>';
+} else {
+    // Apply CSS classes based on the slots availability
+    $slotClass = 'slot-available';
+    $linkClass = '';
+
+    echo '<div><a href="../questions/questions.php?eventId=' . $event['id'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
+}
+
+$startTime = strtotime($interval, $startTime);
+}
+
+if ($isFullyTaken) {
+echo '<div>Fully Reserved</div>';
+}
+} catch (PDOException $e) {
+    // Display error message
+    echo 'Error: ' . $e->getMessage();
+}
+      
         ?>
     </td>
 </tr>

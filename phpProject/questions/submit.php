@@ -1,5 +1,4 @@
 <?php
-
 // Check if the form is submitted
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data
@@ -20,9 +19,9 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
     $legalRepresentativeHomeAddressPostcode = $_POST['legalRepresentativeHomeAddressPostcode'];
     $note = $_POST['note'];
 
-
-    
-
+    // Get the event ID and slot time from the URL query parameters
+    $eventId = $_GET['eventId'];
+    $slotTime = $_GET['slotTime'];
 
     // Database configuration
     $servername = 'localhost';
@@ -37,50 +36,67 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         // Set PDO error mode to exception
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Prepare the SQL statement
-        $stmt = $pdo->prepare('INSERT INTO pupils (firstname, lastname, childBirthDay, 
+        // Prepare the SQL statement to insert pupil data
+        $pupilStmt = $pdo->prepare('INSERT INTO pupils (firstname, lastname, childBirthDay, 
         childHomeAddressStreet, childHomeAddressNumber, childHomeAddressCity, 
         childHomeAddressPostcode, legalRepresentativeFirstname, legalRepresentativeSurname, legalRepresentativeEmail, legalRepresentativePhone, legalRepresentativeHomeAddressStreet, 
         legalRepresentativeHomeAddressNumber, legalRepresentativeHomeAddressCity, legalRepresentativeHomeAddressPostcode, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
-        // Bind the form data to the prepared statement
-        $stmt->bindParam(1, $firstname);
-        $stmt->bindParam(2, $lastname);
-        $stmt->bindParam(3, $childBirthDay);
-        $stmt->bindParam(4, $childHomeAddressStreet);
-        $stmt->bindParam(5, $childHomeAddressNumber);
-        $stmt->bindParam(6, $childHomeAddressCity);
-        $stmt->bindParam(7, $childHomeAddressPostcode);
-        $stmt->bindParam(8, $legalRepresentativeFirstname);
-        $stmt->bindParam(9, $legalRepresentativeSurname);
-        $stmt->bindParam(10, $legalRepresentativeEmail);
-        $stmt->bindParam(11, $legalRepresentativePhone);
-        $stmt->bindParam(12, $legalRepresentativeHomeAddressStreet);
-        $stmt->bindParam(13, $legalRepresentativeHomeAddressNumber);
-        $stmt->bindParam(14, $legalRepresentativeHomeAddressCity);
-        $stmt->bindParam(15, $legalRepresentativeHomeAddressPostcode);
-        $stmt->bindParam(16, $note);
+        // Bind the pupil form data to the prepared statement
+        $pupilStmt->bindParam(1, $firstname);
+        $pupilStmt->bindParam(2, $lastname);
+        $pupilStmt->bindParam(3, $childBirthDay);
+        $pupilStmt->bindParam(4, $childHomeAddressStreet);
+        $pupilStmt->bindParam(5, $childHomeAddressNumber);
+        $pupilStmt->bindParam(6, $childHomeAddressCity);
+        $pupilStmt->bindParam(7, $childHomeAddressPostcode);
+        $pupilStmt->bindParam(8, $legalRepresentativeFirstname);
+        $pupilStmt->bindParam(9, $legalRepresentativeSurname);
+        $pupilStmt->bindParam(10, $legalRepresentativeEmail);
+        $pupilStmt->bindParam(11, $legalRepresentativePhone);
+        $pupilStmt->bindParam(12, $legalRepresentativeHomeAddressStreet);
+        $pupilStmt->bindParam(13, $legalRepresentativeHomeAddressNumber);
+        $pupilStmt->bindParam(14, $legalRepresentativeHomeAddressCity);
+        $pupilStmt->bindParam(15, $legalRepresentativeHomeAddressPostcode);
+        $pupilStmt->bindParam(16, $note);
 
+        // Execute the pupil prepared statement
+        $pupilStmt->execute();
 
-        // Execute the prepared statement
-        $stmt->execute();
+        // Get the ID of the newly inserted pupil
+        $pupilId = $pdo->lastInsertId();
 
-        // Display success message
-        // Execute the prepared statement
-$stmt->execute();
+          // Get the current reservation number for the same slot time
+          $maxReservationNumberStmt = $pdo->prepare('SELECT MAX(reservationNumber) AS maxReservationNumber FROM reservations WHERE eventID = ? AND time = ?');
+          $maxReservationNumberStmt->bindParam(1, $eventId);
+          $maxReservationNumberStmt->bindParam(2, $slotTime);
+          $maxReservationNumberStmt->execute();
+          $maxReservationNumberResult = $maxReservationNumberStmt->fetch(PDO::FETCH_ASSOC);
+          $currentReservationNumber = $maxReservationNumberResult['maxReservationNumber'] ?? 0;
+          
+    // Increment the reservation number by 1
+    $newReservationNumber = $currentReservationNumber + 1;
+    // Prepare the SQL statement to insert reservation data
+        $reservationStmt = $pdo->prepare('INSERT INTO reservations (eventID, time, pupilID, reservationNumber) VALUES (?, ?, ?, ?)');
 
-// Redirect to the message.html page
-header("Location: message.html");
-include 'phpmailer.php';
+        // Bind the reservation data to the prepared statement
+        $reservationStmt->bindParam(1, $eventId);
+        $reservationStmt->bindParam(2, $slotTime);
+        $reservationStmt->bindParam(3, $pupilId);
+        $reservationStmt->bindParam(4, $newReservationNumber);
 
+        // Execute the reservation prepared statement
+        $reservationStmt->execute();
 
-exit();
+        // Close the database connection
+        $pdo = null;
+
+        // Redirect to the success page or any other desired page
+        header('Location: message.html');
+        exit();
     } catch (PDOException $e) {
         // Display error message
         echo 'Error: ' . $e->getMessage();
     }
-
-    // Close the database connection
-    $pdo = null;
 }
 ?>

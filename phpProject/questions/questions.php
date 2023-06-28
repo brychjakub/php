@@ -1,5 +1,21 @@
-
-<!DOCTYPE html>
+<?php
+    // Check if the event ID and slot time parameters exist in the URL
+    if (isset($_GET['eventId']) && isset($_GET['slotTime'])) {
+        // Retrieve the event ID and slot time from the URL query parameters
+        $eventId = $_GET['eventId'];
+        $slotTime = $_GET['slotTime'];
+/* 
+        // Display the event ID and slot time
+        echo '<p>Event ID: ' . $eventId . '</p>';
+        echo '<p>Slot Time: ' . $slotTime . '</p>';
+ */
+        // Add your question form or other content here
+    } else {
+        // Handle the case when the required parameters are missing
+        echo '<p>Error: Required parameters missing.</p>';
+    }
+    ?>
+    <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" href="../styles.css">
@@ -14,27 +30,9 @@
         <li><a href="../events/event_list.php">Události</a></li>
         <li><a href="questions.html">Dotazník</a></li>
     </ul>
-
-    <?php
-    // Check if the event ID and slot time parameters exist in the URL
-    if (isset($_GET['eventId']) && isset($_GET['slotTime'])) {
-        // Retrieve the event ID and slot time from the URL query parameters
-        $eventId = $_GET['eventId'];
-        $slotTime = $_GET['slotTime'];
-
-        // Display the event ID and slot time
-        echo '<p>Event ID: ' . $eventId . '</p>';
-        echo '<p>Slot Time: ' . $slotTime . '</p>';
-
-        // Add your question form or other content here
-    } else {
-        // Handle the case when the required parameters are missing
-        echo '<p>Error: Required parameters missing.</p>';
-    }
-    ?>
     
     <h1>User Information</h1>
-    <form action="submit.php" method="POST" onsubmit="return validateForm()"">
+    <form action="submit.php?eventId=<?php echo $eventId; ?>&slotTime=<?php echo urlencode($slotTime); ?>" method="POST" onsubmit="return validateForm()">
         <div class="field-group">
             <label for="firstname">Jméno<span class="required">*</span></label>
             <input class="text" type="text" id="firstname" name="firstname" required>

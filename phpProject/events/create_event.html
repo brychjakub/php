@@ -5,7 +5,14 @@
     <title>Rezervace CMcZŠ</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
+<body class="container">
+    <div class="sidebar">
+        <ul>
+            <li><a href="create_event.html">Vytvořit událost</a></li>
+            <li><a href="event_list.php">Události</a></li>
+            <li><a href="../questions/questions.html">Dotazník</a></li>
+        </ul>
+    </div>
     <h2>Vytvoř novou událost</h2>
     <form action="save_event.php" method="post" id="event-create-form-id">
         <fieldset>
@@ -49,7 +56,7 @@
         <div class="buttons-container">
             <div class="buttons">
                 <input type="submit" value="Uložit">
-                <a href="../event_list/event_list.html">Zrušit</a>
+               <a href="event_list.php">Zrušit</a>
             </div>
         </div>
     </form>

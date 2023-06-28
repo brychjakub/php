@@ -2,30 +2,19 @@
 <html>
 <head>
     <link rel="stylesheet" href="../styles.css">
-
     <meta charset="UTF-8">
     <title>User Information</title>
-    <script>
-        function copyChildAddress() {
-            if (document.getElementById("sameAddress").checked) {
-                // Copy child's address to representative's address
-                document.getElementById("legalRepresentativeHomeAddressStreet").value = document.getElementById("childHomeAddressStreet").value;
+    <script src="questions.js"></script>
 
-                // Copy child's city to representative's city
-                document.getElementById("legalRepresentativeHomeAddressCity").value = document.getElementById("childHomeAddressCity").value;
-
-                // Copy child's postcode to representative's postcode
-                document.getElementById("legalRepresentativeHomeAddressPostcode").value = document.getElementById("childHomeAddressPostcode").value;
-  
-                // Copy child's postcode to representative's postcode
-                document.getElementById("legalRepresentativeHomeAddressNumber").value = document.getElementById("childHomeAddressNumber").value;
-            }
-        }
-    </script>
 </head>
 <body>
+    <ul>
+        <li><a href="../events/create_event.html">Vytvořit událost</a></li>
+        <li><a href="../events/event_list.php">Události</a></li>
+        <li><a href="questions.html">Dotazník</a></li>
+    </ul>
     <h1>User Information</h1>
-    <form action="submit.php" method="POST">
+    <form action="submit.php" method="POST" onsubmit="return validateForm()"">
         <div class="field-group">
             <label for="firstname">Jméno<span class="required">*</span></label>
             <input class="text" type="text" id="firstname" name="firstname" required>
@@ -130,13 +119,14 @@
             <div class="field-group">
                 <label for="note">Poznámka</label>
                 <textarea class="textarea" type="text" id="note" name="note"></textarea>
-                <div class="description">Poznámka (Zákonný zástupce), 256 Maximální počet znaků</div>
+                <div class="description">Poznámka (Zákonný zástupce), 250 Maximální počet znaků</div>
             </div>
 
             
         </fieldset>
 
         <button type="submit">Submit</button>
+        
     </form>
 </body>
 </html>

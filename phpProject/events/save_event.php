@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         // Redirect to a certain HTML page
-    header('Location: ../event_list/event_list.html');
+    header('Location: event_list.php');
     exit(); // Ensure no further code execution
     } catch (PDOException $e) {
         // Display error message

@@ -84,9 +84,19 @@ try {
       $interval = '+' . $bookingPeriod . ' minutes';
       
       $capacity = 6;
-
+      $currentTime = $startTime;
+        
+        while ($currentTime < $endTime) {
+            $slotTime = date('H:i', $currentTime);
+            $slots[] = array(
+                'time' => $slotTime,
+                'pupils' => array()
+            );
+        
+            $currentTime = strtotime("+$bookingPeriod minutes", $currentTime);
+        }
    
-      for ($i = 1; $i <= $capacity; $i++) {
+      for ($i = 1; $i <= count($slots); $i++) {
           $slotTime = date('H:i', $startTime);
           
           // Get the maximum reservation number for the event and slot time
@@ -97,7 +107,7 @@ try {
           $maxReservationNumberResult = $maxReservationNumberStmt->fetch(PDO::FETCH_ASSOC);
           $maxReservationNumber = $maxReservationNumberResult['maxReservationNumber'];
           $takenSlots = $maxReservationNumber ?? 0;
-
+           
            // Check if the slots are fully taken
     $isFullyTaken = $takenSlots >= $capacity;
  // Display the appropriate slot information
@@ -113,6 +123,9 @@ try {
 
 $startTime = strtotime($interval, $startTime);
 }
+
+// Reset slots
+ $slots = [];
 
 if ($isFullyTaken) {
 echo '<div>Fully Reserved</div>';

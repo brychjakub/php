@@ -32,6 +32,8 @@
     </ul>
     
     <h1>User Information</h1>
+    <div class="page-container">
+
     <form action="submit.php?eventId=<?php echo $eventId; ?>&slotTime=<?php echo urlencode($slotTime); ?>" method="POST" onsubmit="return validateForm()">
         <div class="field-group">
             <label for="firstname">Jméno<span class="required">*</span></label>
@@ -146,5 +148,6 @@
         <button type="submit">Submit</button>
         
     </form>
+</div>
 </body>
 </html>

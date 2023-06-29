@@ -1,4 +1,7 @@
 body {
+  display: flex;
+
+  
     font-family: Arial, sans-serif;
     background-color: #e8f5e9;
   }
@@ -10,13 +13,23 @@ body {
   /* Example styles for form fields */
   .field-group {
     margin-bottom: 10px;
-    background-color: #64B13C;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
+    display: flex;
+    align-items: center;
+}
   
+.field-group label {
+  width: 120px;
+  font-weight: bold;
+}
+.field-group input,
+.field-group textarea {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #CCC;
+}
+.field-group textarea {
+  resize: vertical;
+}
   
   label {
     font-weight: bold;
@@ -120,52 +133,94 @@ h1{
     text-decoration: none;
   }
   
+  .header {
+    /*Increase the z-index to keep it on top of other elements*/
+    background-color: #64B13C;
+    color: #FFF;
+    padding: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+
   .sidebar {
-    order: 2;
-    flex-basis: 300px; /* Set the width of the sidebar */
-    flex-shrink: 0; /* Prevent sidebar from shrinking */
-    background-color: #f1f8e9;
-    border-radius: 5px;
-    margin-left: auto; /* Push sidebar to the right side */
-    overflow-y: auto; /* Add scrollbar when content overflows */
-  }
+    background-color: #64B13C;
+    width: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    transition: width 0.3s ease-in-out;
+    overflow-y: auto;
+}
   
-  @media screen and (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-  
-    .sidebar {
-      order: 1;
-      margin-left: 0;
-      margin-right: auto;
-    }
-  }
+.sidebar.show {
+  width: 250px;
+}
+
+.toggle-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #64B13C;
+  color: #FFF;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.toggle-icon {
+  position: relative;
+  width: 20px;
+  height: 3px;
+  background-color: #FFF;
+}
+
+.toggle-icon::before,
+.toggle-icon::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 3px;
+    background-color: #FFF;
+}
+
+.toggle-icon::before {
+  top: -8px;
+}
+.toggle-icon::after {
+  top: 8px;
+}
   
   .sidebar ul {
     list-style-type: none;
+    margin: 20px 0;
     padding: 0;
-    margin: 0;
-  }
+    text-align: center;
+}
+.sidebar ul li {
+  margin-bottom: 10px;
+}
   
-  .sidebar ul li {
-    margin-bottom: 10px;
-  }
+.sidebar ul li a {
+  color: #FFF;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+}
   
-  .sidebar ul li a {
-    display: block;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: #64B13C;
-    color: #fff; /* Set the text color to white for better visibility */
-  }
-  
-  .content {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f1f8e9;
-    border-radius: 5px;
-  }
+.content {
+  margin-left: 80px;
+  padding: 20px;
+}
   
   .icon-delete {
     color: #E60032;
@@ -193,11 +248,11 @@ h1{
     color: #E60032; /* Red color for fully reserved text */
   }
   form {
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 25px rgba(5, 0, 5, 0.5);
   }
   
   form h1 {
@@ -212,7 +267,7 @@ h1{
   
   form label {
     font-weight: bold;
-    color: #FFF;
+    color: #080808;
     display: block;
     margin-bottom: 5px;
   }
@@ -223,12 +278,12 @@ h1{
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #FAAF00;
+    background-color: #faaf007e;
     color: #000;
   }
   
   form .description {
-    color: #FFF;
+    color: #000000;
     font-style: italic;
     font-size: 12px;
   }
@@ -251,10 +306,9 @@ h1{
   }
   
   .page-container {
-    background-color: #e8f5e9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-  }
+    background-color: #FDFDFD;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
   

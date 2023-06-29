@@ -145,6 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Edit Reservation</title>
     <link rel="stylesheet" href="../styles.css">
+    <script src="../questions.js"></script>
 </head>
 <body class="container">
     <h2>Edit Reservation</h2>
@@ -252,11 +253,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="description">PSČ (Zákonný zástupce)</div>
                 </div>
 
+                
                 <div class="field-group">
-                    <label for="note">Poznámka</label>
-                    <textarea class="textarea" type="text" id="note" name="note"><?php echo $note; ?></textarea>
-                    <div class="description">Poznámka (Zákonný zástupce), 250 Maximální počet znaků</div>
-                </div>
+    <label for="note">Čas rezervace</label>
+    <?php
+if (isset($_GET['slotTime'])) {
+    $slotTime = $_GET['slotTime'];
+} else {
+    $slotTime = '';
+}
+?>
+
+<input class="text" type="text" name="note" readonly value="<?php echo $slotTime ? $slotTime : $note; ?>">
+<a href="edit_time.php?edit=<?php echo $reservation['id']; ?>">
+                            <span class="icon-edit">✏️</span>
+                            </a></div>
             </fieldset>
             <input type="hidden" name="reservationIdToUpdate" value="<?php echo $reservationId; ?>">
         </fieldset>

@@ -19,14 +19,9 @@
     <title>User Information</title>
      
     <script src="questions.js"></script>
+    <script src="../sidebar.js"></script>
 
-    <script>
-        // JavaScript function to toggle the visibility of the sidebar
-        function toggleSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.classList.toggle('show');
-        }
-    </script>
+    
 </head>
 <body>
 <div class="sidebar">
@@ -59,7 +54,7 @@
         <div class="field-group">
             <label for="childBirthDay">Narození<span class="required">*</span></label>
 
-            <input class="text" type="text" id="childBirthDay" name="childBirthDay" value="dd.mm.rrrr" required>
+            <input class="text" type="text" id="childBirthDay" name="childBirthDay"  required>
         </div>
 
         <div class="field-group">
@@ -133,14 +128,14 @@
             </div>
 
             <div class="field-group">
-                <label for="note">Poznámka</label>
-                <textarea class="textarea" type="text" id="note" name="note"></textarea>
-                <div class="description">Poznámka, 250 Maximální počet znaků</div>
-            </div>
-
-            
+    <label for="note">Čas rezervace</label>
+    <textarea class="textarea" id="note" name="note" readonly><?php echo isset($_GET['slotTime']) ? $_GET['slotTime'] : ''; ?></textarea>
+</div>
+  
 
         <button type="submit">Submit</button>
+        <a href="../events/event_list_user.php">Zrušit</a>
+
         
     </form>
 </div>

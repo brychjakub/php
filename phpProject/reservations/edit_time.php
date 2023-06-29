@@ -6,6 +6,30 @@ $password = '';
 $dbname = 'first_db';
 
 try {
+    // Execute the SQL UPDATE statement to synchronize the time column
+$sql = 'UPDATE reservations
+JOIN pupils ON reservations.pupilID = pupils.ID
+SET reservations.time = pupils.note';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+// Retrieve the updated time value from the reservations table
+$time = ''; // Initialize the time variable
+$pupilId = $_GET['edit']; // Assuming you have the pupil ID from the URL parameter
+$stmt = $pdo->prepare('SELECT time FROM reservations WHERE pupilID = ?');
+$stmt->bindParam(1, $pupilId);
+$stmt->execute();
+$reservation = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($reservation) {
+$time = $reservation['time'];
+}
+
+// Display the time value or use it for further processing
+echo '<input class="text" type="text" name="time" readonly value="' . $time . '">';
+
+    $editValue = $_GET['edit'];
+
     // Create a new PDO instance
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
@@ -108,7 +132,7 @@ try {
     $slotClass = 'slot-available';
     $linkClass = '';
 
-    echo '<div><a href="../questions/questions.php?eventId=' . $event['id'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
+    echo '<div><a href="edit_reservation.php?edit=' . urlencode($editValue) . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
 }
 
 $startTime = strtotime($interval, $startTime);

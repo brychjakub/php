@@ -58,8 +58,8 @@
 
         <div class="field-group">
             <label for="childBirthDay">Narození<span class="required">*</span></label>
-            <input class="text" type="text" id="childBirthDay" name="childBirthDay" required>
-            <div class="description">Datum je ve formátu dd.mm.rrrr</div>
+
+            <input class="text" type="text" id="childBirthDay" name="childBirthDay" value="dd.mm.rrrr" required>
         </div>
 
         <div class="field-group">

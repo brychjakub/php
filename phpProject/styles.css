@@ -147,14 +147,19 @@ h1{
 
   .sidebar {
     background-color: #64B13C;
-    width: 80px;
+    width: 0;
     position: fixed;
-    top: 0;
+    top: 80px;
     left: 0;
     bottom: 0;
     z-index: 999;
     transition: width 0.3s ease-in-out;
     overflow-y: auto;
+    /*hover effect*/
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 200);
+    /*animation*/
+
+
 }
   
 .sidebar.show {
@@ -168,7 +173,7 @@ h1{
   background-color: #64B13C;
   color: #FFF;
   cursor: pointer;
-  position: absolute;
+  position: fixed;
   top: 20px;
   left: 20px;
   width: 40px;

@@ -90,7 +90,7 @@ h1{
   
   h2 {
     margin-top: 0;
-    color: #E60032;
+    color: #A66EA7;
     text-align: center;
   }
   
@@ -216,6 +216,7 @@ h1{
 .content {
   margin-left: 80px;
   padding: 20px;
+  position: center;
 }
   
   .icon-delete {

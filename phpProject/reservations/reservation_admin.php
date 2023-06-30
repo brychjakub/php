@@ -57,15 +57,15 @@ $pdo = null;
         <table>
             <thead>
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Child Birthday</th>
-                    <th>Child Address</th>
-                    <th>Legal Representative</th>
+                    <th>Jméno</th>
+                    <th>příjmení</th>
+                    <th>Datum narození</th>
+                    <th>Adresa</th>
+                    <th>Zákonný zástupce</th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th>Note</th>
-                    <th>Actions</th>
+                    <th>Telefon</th>
+                    <th>Kdy</th>
+                    <th>Úpravy</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,7 +78,7 @@ $pdo = null;
                         <td><?php echo $reservation['legalRepresentativeFirstname'] . ' ' . $reservation['legalRepresentativeSurname']; ?></td>
                         <td><?php echo $reservation['legalRepresentativeEmail']; ?></td>
                         <td><?php echo $reservation['legalRepresentativePhone']; ?></td>
-                        <td><?php echo $reservation['note']; ?></td>
+                        <td><?php echo $reservation['note'] . ' ' . $reservation['eventDate']; ?></td>
                         <td>
                             <a href="edit_reservation.php?edit=<?php echo $reservation['id']; ?>">
                             <span class="icon-edit">✏️</span>

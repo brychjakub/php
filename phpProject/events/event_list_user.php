@@ -35,18 +35,25 @@ $pdo = null;
     <meta charset="UTF-8">
     <title>Rezervace CMcZŠ</title>
     <link rel="stylesheet" href="../styles.css">
+    <script src="questions.js"></script>
+    <script src="../sidebar.js"></script>
+
+    
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <ul>
-                <li><a href="create_event.html">Vytvořit událost</a></li>
-                <li><a href="event_list.php">Události</a></li>
-                <li><a href="../questions/questions.html">Dotazník</a></li>
-            </ul>
+<div class="sidebar">
+        <div class="toggle-button" onclick="toggleSidebar()">
+            <span class="toggle-icon"></span>
         </div>
+        <ul>
+            <li><a href="../events/create_event.html">Vytvořit událost</a></li>
+            <li><a href="../events/event_list.php">Události</a></li>
+            <li><a href="questions.html">Dotazník</a></li>
+        </ul>
+    </div>
+
         <div class="content">
-            <h2>Seznam událostí</h2>
+            <h2>Kdy to bude</h2>
             <table>
                 <thead>
                     <tr>
@@ -59,9 +66,7 @@ $pdo = null;
                         <tr>
                             <td><a href="#" onclick="showOptions(<?php echo $event['id']; ?>)"><?php echo $event['eventName']; ?></a></td>
                             <td><?php echo date('d.m.Y', strtotime($event['startDate'])); ?> ; <?php echo date('H:i', strtotime($event['startTime'])); ?> - <?php echo date('H:i', strtotime($event['endTime'])); ?></td>
-                           
-                           
-                         
+
                         </tr>
                         <tr id="options-<?php echo $event['id']; ?>" style="display: none;">
     <td colspan="3">
@@ -118,7 +123,7 @@ try {
     $slotClass = 'slot-available';
     $linkClass = '';
 
-    echo '<div><a href="../questions/questions.php?eventId=' . $event['id'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
+    echo '<div><a href="../questions/questions.php?eventId=' . $event['id'] . '&startDate=' . $event['startDate'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
 }
 
 $startTime = strtotime($interval, $startTime);

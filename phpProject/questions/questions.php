@@ -5,6 +5,7 @@
         $eventId = $_GET['eventId'];
         $slotTime = $_GET['slotTime'];
 
+
       
     } else {
         // Handle the case when the required parameters are missing
@@ -130,6 +131,12 @@
             <div class="field-group">
     <label for="note">Čas rezervace</label>
     <textarea class="textarea" id="note" name="note" readonly><?php echo isset($_GET['slotTime']) ? $_GET['slotTime'] : ''; ?></textarea>
+
+</div>
+<div class="field-group">
+<label for="eventDate">Datum rezervace</label>
+
+<textarea class="textarea" id="eventDate" name="eventDate" readonly><?php echo isset($_GET['startDate']) ? $_GET['startDate'] : ''; ?></textarea>
 </div>
   
 

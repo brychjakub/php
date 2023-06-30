@@ -31,6 +31,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $legalRepresentativeHomeAddressCity = $_POST['legalRepresentativeHomeAddressCity'];
         $legalRepresentativeHomeAddressPostcode = $_POST['legalRepresentativeHomeAddressPostcode'];
         $note = $_POST['note'];
+        $eventDate = $_POST['eventDate'];
 
         // Check if the pupil already exists
         $checkPupilStmt = $pdo->prepare('SELECT COUNT(*) AS pupilCount FROM pupils WHERE firstname = ? AND lastname = ? AND childBirthDay = ?');
@@ -52,7 +53,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $slotTime = $_GET['slotTime'];
 
         // Prepare the SQL statement to insert pupil data
-        $pupilStmt = $pdo->prepare('INSERT INTO pupils (firstname, lastname, childBirthDay, childHomeAddressStreet, childHomeAddressNumber, childHomeAddressCity, childHomeAddressPostcode, legalRepresentativeFirstname, legalRepresentativeSurname, legalRepresentativeEmail, legalRepresentativePhone, legalRepresentativeHomeAddressStreet, legalRepresentativeHomeAddressNumber, legalRepresentativeHomeAddressCity, legalRepresentativeHomeAddressPostcode, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $pupilStmt = $pdo->prepare('INSERT INTO pupils (firstname, lastname, childBirthDay, childHomeAddressStreet, childHomeAddressNumber, childHomeAddressCity, childHomeAddressPostcode, legalRepresentativeFirstname, legalRepresentativeSurname, legalRepresentativeEmail, legalRepresentativePhone, legalRepresentativeHomeAddressStreet, legalRepresentativeHomeAddressNumber, legalRepresentativeHomeAddressCity, legalRepresentativeHomeAddressPostcode, note, eventDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
         // Bind the pupil form data to the prepared statement
         $pupilStmt->bindParam(1, $firstname);
@@ -71,6 +72,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
         $pupilStmt->bindParam(14, $legalRepresentativeHomeAddressCity);
         $pupilStmt->bindParam(15, $legalRepresentativeHomeAddressPostcode);
         $pupilStmt->bindParam(16, $note);
+        $pupilStmt->bindParam(17, $eventDate);
 
         // Execute the pupil prepared statement
         $pupilStmt->execute();

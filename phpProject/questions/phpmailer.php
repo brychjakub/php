@@ -20,7 +20,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Get the last inserted row from the pupils table
-    $sql = "SELECT legalRepresentativeEmail, firstname, lastname, childBirthDay, childHomeAddressStreet, childHomeAddressNumber, childHomeAddressCity, childHomeAddressPostcode, legalRepresentativeFirstname, legalRepresentativeSurname, legalRepresentativePhone, legalRepresentativeHomeAddressStreet, legalRepresentativeHomeAddressNumber, legalRepresentativeHomeAddressCity, legalRepresentativeHomeAddressPostcode, note FROM pupils ORDER BY id DESC LIMIT 1";
+    $sql = "SELECT legalRepresentativeEmail, firstname, lastname, childBirthDay, childHomeAddressStreet, childHomeAddressNumber, childHomeAddressCity, childHomeAddressPostcode, legalRepresentativeFirstname, legalRepresentativeSurname, legalRepresentativePhone, legalRepresentativeHomeAddressStreet, legalRepresentativeHomeAddressNumber, legalRepresentativeHomeAddressCity, legalRepresentativeHomeAddressPostcode, note, eventDate FROM pupils ORDER BY id DESC LIMIT 1";
     $stmt = $conn->query($sql);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -60,7 +60,7 @@ try {
     Email zákonného zástupce: ' . $legalRepresentativeEmail . '
     Telefon zákonného zástupce: ' . $legalRepresentativePhone . '
     Adresa zákonného zástupce: ' . $legalRepresentativeHomeAddressStreet . ' ' . $legalRepresentativeHomeAddressNumber . ', ' . $legalRepresentativeHomeAddressCity . ', ' . $legalRepresentativeHomeAddressPostcode . '
-    Čas zápisu: ' . $note . '
+    K zápisu přijďte: ' . $eventDate . ' ' . $note . ' 
     
     Děkujeme za váš čas.
     

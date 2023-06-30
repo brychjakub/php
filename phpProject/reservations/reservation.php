@@ -5,6 +5,8 @@ $dbUsername = 'root';
 $dbPassword = '';  // Your database password
 $dbName     = 'first_db';  // Your database name
 
+$search = $_GET['search'] ?? '';
+
 try {
     // Create a new PDO instance
     $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUsername, $dbPassword);
@@ -13,13 +15,22 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Prepare the SQL statement
-    $stmt = $pdo->prepare('SELECT * FROM pupils');
+    $query = 'SELECT * FROM pupils';
+    $params = [];
+
+    if ($search !== '') {
+        $query .= ' WHERE firstname LIKE ? OR lastname LIKE ?';
+        $params[] = "%$search%";
+        $params[] = "%$search%";
+    }
+
+    $stmt = $pdo->prepare($query);
 
     // Execute the prepared statement
-    $stmt->execute();
+    $stmt->execute($params);
 
-    // Fetch all reservations as an associative array
-    $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Fetch all pupils as an associative array
+    $pupils = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     // Display error message
     echo 'Error: ' . $e->getMessage();
@@ -27,48 +38,57 @@ try {
 
 // Close the database connection
 $pdo = null;
-?>
+?> 
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Reservations List</title>
+    <title>Pupils List</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
-<body class="container">
-    <h2>Reservations List</h2>
-    <?php if (!empty($reservations)) : ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Child Birthday</th>
-                    <th>Child Address</th>
-                    <th>Legal Representative</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Note</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($reservations as $reservation) : ?>
+
+    <?php include '../sidebar_user.php'; ?>
+   
+    <body class="container">
+    <header>
+
+<div class="search-container">
+    <form method="get" action="">
+        <input type="text" name="search" value="<?= htmlentities($search) ?>" placeholder="Search for pupils">
+        <button type="submit">Search</button>
+    </form>
+</div>
+</header>
+
+
+
+    <h2>Všechny registrace</h2>
+    <div class="reservation-container">
+        <?php if (!empty($pupils)) : ?>
+            <table>
+                <thead>
                     <tr>
-                        <td><?php echo $reservation['firstname']; ?></td>
-                        <td><?php echo $reservation['lastname']; ?></td>
-                        <td><?php echo $reservation['childBirthDay']; ?></td>
-                        <td><?php echo $reservation['childHomeAddressStreet'] . ' ' . $reservation['childHomeAddressNumber'] . ', ' . $reservation['childHomeAddressCity'] . ' ' . $reservation['childHomeAddressPostcode']; ?></td>
-                        <td><?php echo $reservation['legalRepresentativeFirstname'] . ' ' . $reservation['legalRepresentativeSurname']; ?></td>
-                        <td><?php echo $reservation['legalRepresentativeEmail']; ?></td>
-                        <td><?php echo $reservation['legalRepresentativePhone']; ?></td>
-                        <td><?php echo $reservation['note']; ?></td>
+                        <th>Jméno</th>
+                       
+                        <th>Kdy</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else : ?>
-        <p>No reservations found.</p>
-    <?php endif; ?>
+                </thead>
+
+                <tbody>
+                    <?php foreach ($pupils as $pupil) : ?>
+                        <tr>
+                        <td><?php echo substr($pupil['firstname'], 0, 1) . '.' . ' ' . $pupil['lastname'];; ?></td>
+                          
+                            <td><?php echo $pupil['note'] . ' ' . $pupil['eventDate']; ?></td>
+                            
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else : ?>
+            <p>No pupils found.</p>
+        <?php endif; ?>
+    </div>
 </body>
 </html>

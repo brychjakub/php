@@ -70,15 +70,21 @@ try {
 
         // Display the event details
         echo '<h2>Detaily události</h2>';
+        echo '<table>';
+        echo '<thead>';
         echo '<p>Název: ' . $event['eventName'] . '</p>';
         echo '<p>Čas začátku: ' . $event['startTime'] . '</p>';
         echo '<p>Čas konce: ' . $event['endTime'] . '</p>';
+        echo '</thead>';
+
+        echo '</table>';
+
 
         // Display the reservation slots and corresponding pupil details
         echo '<h2>Rezervační časy</h2>';
         foreach ($slots as $index => $slot) {
             echo '<div class="slot">';
-            echo '<h3>'  . $slot['time'] . '</h3>';
+            echo '<h2>'  . $slot['time'] . '</h2>';
 
             if (!empty($slot['pupils'])) {
                 echo '<table>';
@@ -113,3 +119,14 @@ try {
     echo 'Chyba: ' . $e->getMessage();
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rezervace CMcZŠ</title>
+    <link rel="stylesheet" href="../styles.css">
+<?php include '../sidebar.php'; ?>
+</head>
+</html>
+
+

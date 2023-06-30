@@ -143,13 +143,8 @@ function calculateOpenPositions($startTime, $endTime, $bookingPeriod) {
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body class="container">
-    <div class="sidebar">
-        <ul>
-            <li><a href="create_event.html">Vytvořit událost</a></li>
-            <li><a href="event_list.php">Události</a></li>
-            <li><a href="../questions/questions.html">Dotazník</a></li>
-        </ul>
-    </div>
+<?php include '../sidebar.php'; ?>
+
     <h2>Vytvoř novou událost</h2>
     <form action="edit_event.php" method="post" id="event-create-form-id">
         <fieldset>

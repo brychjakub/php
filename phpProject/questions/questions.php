@@ -17,32 +17,24 @@
 <head>
     <link rel="stylesheet" href="../styles.css">
     <meta charset="UTF-8">
-    <title>User Information</title>
-     
-    <script src="questions.js"></script>
-    
-    <script src="../sidebar.js"></script>
+    <script src="../questions.js"></script>
 
-    
+    <title>User Information</title>
+
+         
 </head>
 <body>
-<div class="sidebar">
-        <div class="toggle-button" onclick="toggleSidebar()">
-            <span class="toggle-icon"></span>
-        </div>
-        <ul>
-            <li><a href="../events/create_event.html">Vytvořit událost</a></li>
-            <li><a href="../events/event_list.php">Události</a></li>
-            <li><a href="questions.html">Dotazník</a></li>
-        </ul>
-    </div>
+<div class="form-container">
 
-    <div class="content">
-    <div class="page-container">
+<?php include '../sidebar_user.php'; ?>
 
-    <form action="submit.php?eventId=<?php echo $eventId; ?>&slotTime=<?php echo urlencode($slotTime); ?>" method="POST" onsubmit="return validateForm()">
+
+    <form action="submit.php?eventId=<?php echo $eventId; ?>&slotTime=<?php echo urlencode($slotTime); ?>" method="POST" onsubmit="return validateForm()" id="reservation-edit-form-id">
+      
     <h3>Podrobnosti dítěte</h3>
-    
+
+    <fieldset>
+
     <div class="field-group">
             <label for="firstname">Jméno<span class="required">*</span></label>
             <input class="text" type="text" id="firstname" name="firstname" required>
@@ -79,8 +71,10 @@
             <input class="text" type="text" id="childHomeAddressPostcode" name="childHomeAddressPostcode" required>
         </div>
 
+        </fieldset>
+
         <h3>Podrobnosti zákonného zástupce</h3>
-        <fieldset class="group">
+        <fieldset>
             <legend><span>Shodné bydliště</span></legend>
             <div class="checkbox">
                 <input class="checkbox" type="checkbox" name="sameAddress" id="sameAddress" onclick="copyChildAddress()">
@@ -88,6 +82,7 @@
             </div>
             <div>Zákonný zástupce má shodné bydliště jako dítě</div>
         </fieldset>
+    <fieldset>
 
             <div class="field-group">
                 <label for="legalRepresentativeFirstname">Jméno<span class="required">*</span></label>
@@ -139,14 +134,21 @@
 <textarea class="textarea" id="eventDate" name="eventDate" readonly><?php echo isset($_GET['startDate']) ? date('d.m.Y', strtotime($_GET['startDate'])) : ''; ?></textarea>
 </div>
   
+</fieldset>
 
+
+<div class="buttons-container">
+            <div class="buttons">
         <button type="submit">Submit</button>
         <a href="../events/event_list_user.php">Zrušit</a>
 
+    </div>
+        </div>
         
     </form>
-</div>
-</div>
+
+    </div>
 
 </body>
 </html>
+

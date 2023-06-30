@@ -150,11 +150,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Edit Reservation</title>
     <link rel="stylesheet" href="../styles.css">
     <script src="../questions.js"></script>
+
 </head>
 <body class="container">
+    <?php include '../sidebar.php'; ?>
     <h2>Edit Reservation</h2>
     <form action="edit_reservation.php" method="post" id="reservation-edit-form-id">
-        <fieldset>
+    <h3>Podrobnosti dítěte</h3>
+
+    <fieldset>
+
             <!-- Include your form fields here -->
             <div class="field-group">
                 <label for="firstname">Jméno<span class="required">*</span></label>
@@ -197,6 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input class="text" type="text" id="childHomeAddressPostcode" name="childHomeAddressPostcode" value="<?php echo $childHomeAddressPostcode; ?>" required>
                 <div class="description">PSČ (Dítě)</div>
             </div>
+            </fieldset>
 
             <h3>Podrobnosti zákonného zástupce</h3>
             <fieldset class="group">
@@ -280,7 +286,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </a>
             </fieldset>
             <input type="hidden" name="reservationIdToUpdate" value="<?php echo $reservationId; ?>">
-        </fieldset>
         <div class="buttons-container">
             <div class="buttons">
                 <input type="submit" value="Uložit">

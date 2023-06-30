@@ -36,23 +36,13 @@ $pdo = null;
     <title>Rezervace CMcZŠ</title>
     <link rel="stylesheet" href="../styles.css">
     <script src="questions.js"></script>
-    <script src="../sidebar.js"></script>
 
     
 </head>
 <body>
-<div class="sidebar">
-        <div class="toggle-button" onclick="toggleSidebar()">
-            <span class="toggle-icon"></span>
-        </div>
-        <ul>
-            <li><a href="../events/create_event.html">Vytvořit událost</a></li>
-            <li><a href="../events/event_list.php">Události</a></li>
-            <li><a href="questions.html">Dotazník</a></li>
-        </ul>
-    </div>
+    <?php include '../sidebar_user.php'; ?>
 
-        <div class="content">
+        <div class="reservation-container">
             <h2>Kdy to bude</h2>
             <table>
                 <thead>

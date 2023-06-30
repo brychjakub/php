@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($user && password_verify($submittedPassword, $user['password'])) {
             // Authentication successful, redirect to the desired page
-            header('Location: ../events/event_list.html');
+            header('Location: ../events/event_list.php');
             exit();
         } else {
             // Authentication failed, display an error message

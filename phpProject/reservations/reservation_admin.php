@@ -5,6 +5,8 @@ $dbUsername = 'root';
 $dbPassword = '';  // Your database password
 $dbName     = 'first_db';  // Your database name
 
+$search = $_GET['search'] ?? '';
+
 try {
     // Create a new PDO instance
     $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUsername, $dbPassword);
@@ -13,13 +15,22 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Prepare the SQL statement
-    $stmt = $pdo->prepare('SELECT * FROM pupils');
+    $query = 'SELECT * FROM pupils';
+    $params = [];
+
+    if ($search !== '') {
+        $query .= ' WHERE firstname LIKE ? OR lastname LIKE ?';
+        $params[] = "%$search%";
+        $params[] = "%$search%";
+    }
+
+    $stmt = $pdo->prepare($query);
 
     // Execute the prepared statement
-    $stmt->execute();
+    $stmt->execute($params);
 
-    // Fetch all reservations as an associative array
-    $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Fetch all pupils as an associative array
+    $pupils = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     // Display error message
     echo 'Error: ' . $e->getMessage();
@@ -33,67 +44,70 @@ $pdo = null;
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Reservations List</title>
+    <title>Pupils List</title>
     <link rel="stylesheet" href="../styles.css">
-    <style>
-        .edit-link,
-        .delete-link {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #f2f2f2;
-            color: #333;
-            text-decoration: none;
-            border-radius: 3px;
-        }
-        .delete-link {
-            margin-left: 5px;
-            background-color: #ffcccc;
-        }
-    </style>
 </head>
-<body class="container">
-    <h2>Reservations List</h2>
-    <?php if (!empty($reservations)) : ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Jméno</th>
-                    <th>příjmení</th>
-                    <th>Datum narození</th>
-                    <th>Adresa</th>
-                    <th>Zákonný zástupce</th>
-                    <th>Email</th>
-                    <th>Telefon</th>
-                    <th>Kdy</th>
-                    <th>Úpravy</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($reservations as $reservation) : ?>
-                    <tr>
-                        <td><?php echo $reservation['firstname']; ?></td>
-                        <td><?php echo $reservation['lastname']; ?></td>
-                        <td><?php echo $reservation['childBirthDay']; ?></td>
-                        <td><?php echo $reservation['childHomeAddressStreet'] . ' ' . $reservation['childHomeAddressNumber'] . ', ' . $reservation['childHomeAddressCity'] . ' ' . $reservation['childHomeAddressPostcode']; ?></td>
-                        <td><?php echo $reservation['legalRepresentativeFirstname'] . ' ' . $reservation['legalRepresentativeSurname']; ?></td>
-                        <td><?php echo $reservation['legalRepresentativeEmail']; ?></td>
-                        <td><?php echo $reservation['legalRepresentativePhone']; ?></td>
-                        <td><?php echo $reservation['note'] . ' ' . $reservation['eventDate']; ?></td>
-                        <td>
-                            <a href="edit_reservation.php?edit=<?php echo $reservation['id'] . '&startDate=' . $reservation['eventDate']; ?>">
 
-                            <span class="icon-edit">✏️</span>
-                            </a>
-                            <a href="delete_reservation.php?delete=<?php echo $reservation['id']; ?>" onclick="return confirm('Are you sure you want to delete this reservation?');">
-    <span class="icon-delete">🗑️</span>
-</a>
-                        </td>
+    <?php include '../sidebar.php'; ?>
+   
+    <body class="container">
+    <header>
+
+<div class="search-container">
+    <form method="get" action="">
+        <input type="text" name="search" value="<?= htmlentities($search) ?>" placeholder="Search for pupils">
+        <button type="submit">Search</button>
+    </form>
+</div>
+</header>
+
+
+
+    <h2>Všichni žáci</h2>
+
+    <div class="page-container">
+        <?php if (!empty($pupils)) : ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jméno</th>
+                        <th>Příjmení</th>
+                        <th>Datum narození</th>
+                        <th>Adresa</th>
+                        <th>Zákonný zástupce</th>
+                        <th>Email</th>
+                        <th>Telefon</th>
+                        <th>Kdy</th>
+                        <th>Úpravy</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else : ?>
-        <p>No reservations found.</p>
-    <?php endif; ?>
+                </thead>
+                <tbody>
+                    <?php foreach ($pupils as $pupil) : ?>
+                        <tr>
+                            <td><?php echo $pupil['firstname']; ?></td>
+                            <td><?php echo $pupil['lastname']; ?></td>
+                            <td><?php echo $pupil['childBirthDay']; ?></td>
+                            <td><?php echo $pupil['childHomeAddressStreet'] . ' ' . $pupil['childHomeAddressNumber'] . ', ' . $pupil['childHomeAddressCity'] . ' ' . $pupil['childHomeAddressPostcode']; ?></td>
+                            <td><?php echo $pupil['legalRepresentativeFirstname'] . ' ' . $pupil['legalRepresentativeSurname']; ?></td>
+                            <td><?php echo $pupil['legalRepresentativeEmail']; ?></td>
+                            <td><?php echo $pupil['legalRepresentativePhone']; ?></td>
+                            <td><?php echo $pupil['note'] . ' ' . $pupil['eventDate']; ?></td>
+                            <td>
+                                <a href="edit_reservation.php?edit=<?php echo $pupil['id'] . '&startDate=' . $pupil['eventDate']; ?>">
+                                    <span class="icon-edit">✏️</span>
+                                </a>
+                                <a href="delete_reservation.php?delete=<?php echo $pupil['id']; ?>" onclick="return confirm('Are you sure you want to delete this pupil?');">
+                                    <span class="icon-delete">🗑️</span>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else : ?>
+            <p>No pupils found.</p>
+        <?php endif; ?>
+    </div>
+  
 </body>
 </html>

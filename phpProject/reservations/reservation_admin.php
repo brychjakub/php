@@ -80,7 +80,8 @@ $pdo = null;
                         <td><?php echo $reservation['legalRepresentativePhone']; ?></td>
                         <td><?php echo $reservation['note'] . ' ' . $reservation['eventDate']; ?></td>
                         <td>
-                            <a href="edit_reservation.php?edit=<?php echo $reservation['id']; ?>">
+                            <a href="edit_reservation.php?edit=<?php echo $reservation['id'] . '&startDate=' . $reservation['eventDate']; ?>">
+
                             <span class="icon-edit">✏️</span>
                             </a>
                             <a href="delete_reservation.php?delete=<?php echo $reservation['id']; ?>" onclick="return confirm('Are you sure you want to delete this reservation?');">

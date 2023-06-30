@@ -85,11 +85,22 @@ try {
       $endTime = strtotime($event['endTime']);
       $bookingPeriod = $event['bookingPeriod'];
       $interval = '+' . $bookingPeriod . ' minutes';
-      
       $capacity = 6;
 
+      $currentTime = $startTime;
+        
+        while ($currentTime < $endTime) {
+            $slotTime = date('H:i', $currentTime);
+            $slots[] = array(
+                'time' => $slotTime,
+                'pupils' => array()
+            );
+        
+            $currentTime = strtotime("+$bookingPeriod minutes", $currentTime);
+        }
+
    
-      for ($i = 1; $i <= $capacity; $i++) {
+      for ($i = 1; $i <= count($slots); $i++) {
           $slotTime = date('H:i', $startTime);
           
           // Get the maximum reservation number for the event and slot time
@@ -111,11 +122,13 @@ try {
     $slotClass = 'slot-available';
     $linkClass = '';
 
-    echo '<div><a href="edit_reservation.php?edit=' . urlencode($editValue) . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
+    echo '<div><a href="edit_reservation.php?edit=' . urlencode($editValue) . '&startDate=' . $event['startDate'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
 }
 
 $startTime = strtotime($interval, $startTime);
 }
+// Reset slots
+$slots = [];
 
 if ($isFullyTaken) {
 echo '<div>Fully Reserved</div>';

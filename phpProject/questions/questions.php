@@ -135,8 +135,7 @@
 </div>
 <div class="field-group">
 <label for="eventDate">Datum rezervace</label>
-
-<textarea class="textarea" id="eventDate" name="eventDate" readonly><?php echo isset($_GET['startDate']) ? $_GET['startDate'] : ''; ?></textarea>
+<textarea class="textarea" id="eventDate" name="eventDate" readonly><?php echo isset($_GET['startDate']) ? date('d.m.Y', strtotime($_GET['startDate'])) : ''; ?></textarea>
 </div>
   
 

@@ -60,7 +60,7 @@ try {
     Email zákonného zástupce: ' . $legalRepresentativeEmail . '
     Telefon zákonného zástupce: ' . $legalRepresentativePhone . '
     Adresa zákonného zástupce: ' . $legalRepresentativeHomeAddressStreet . ' ' . $legalRepresentativeHomeAddressNumber . ', ' . $legalRepresentativeHomeAddressCity . ', ' . $legalRepresentativeHomeAddressPostcode . '
-    Poznámka: ' . $note . '
+    Čas zápisu: ' . $note . '
     
     Děkujeme za váš čas.
     

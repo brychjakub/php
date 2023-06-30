@@ -269,14 +269,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         ?>
 
                             <input class="text" type="text" name="note" readonly value="<?php echo $slotTime ? $slotTime : $note; ?>">
-                            <a href="edit_time.php?edit=<?php echo $reservation['id']; ?>">
-                            <span class="icon-edit">✏️</span>
-                            </a>
+                            
                 </div>
                <div class="field-group">
 <label for="eventDate">Datum rezervace</label>
 <textarea class="textarea" id="eventDate" name="eventDate" readonly><?php echo isset($_GET['startDate']) ? date('d.m.Y', strtotime($_GET['startDate'])) : ''; ?></textarea>
 </div>
+<a href="edit_time.php?edit=<?php echo $reservation['id']; ?>">
+                            <span class="icon-edit">změnit čas a datum</span>
+                            </a>
             </fieldset>
             <input type="hidden" name="reservationIdToUpdate" value="<?php echo $reservationId; ?>">
         </fieldset>

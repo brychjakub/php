@@ -108,6 +108,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
         // Redirect to the success page or any other desired page
         header('Location: message.html');
+        include 'phpmailer.php';
         exit();
     } catch (PDOException $e) {
         // Display error message

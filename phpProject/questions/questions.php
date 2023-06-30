@@ -20,6 +20,7 @@
     <title>User Information</title>
      
     <script src="questions.js"></script>
+    
     <script src="../sidebar.js"></script>
 
     

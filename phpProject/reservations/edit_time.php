@@ -6,6 +6,9 @@ $password = '';
 $dbname = 'first_db';
 
 try {
+    
+    $editValue = $_GET['edit'];
+
     // Create a new PDO instance
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 
@@ -35,15 +38,18 @@ $pdo = null;
     <meta charset="UTF-8">
     <title>Rezervace CMcZŠ</title>
     <link rel="stylesheet" href="../styles.css">
-    <script src="questions.js"></script>
-
-    
 </head>
 <body>
-    <?php include '../sidebar_user.php'; ?>
-
-        <div class="reservation-container">
-            <h2>Kdy to bude</h2>
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li><a href="create_event.html">Vytvořit událost</a></li>
+                <li><a href="event_list.php">Události</a></li>
+                <li><a href="../questions/questions.html">Dotazník</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <h2>Seznam událostí</h2>
             <table>
                 <thead>
                     <tr>
@@ -56,7 +62,9 @@ $pdo = null;
                         <tr>
                             <td><a href="#" onclick="showOptions(<?php echo $event['id']; ?>)"><?php echo $event['eventName']; ?></a></td>
                             <td><?php echo date('d.m.Y', strtotime($event['startDate'])); ?> ; <?php echo date('H:i', strtotime($event['startTime'])); ?> - <?php echo date('H:i', strtotime($event['endTime'])); ?></td>
-
+                           
+                           
+                         
                         </tr>
                         <tr id="options-<?php echo $event['id']; ?>" style="display: none;">
     <td colspan="3">
@@ -77,8 +85,8 @@ try {
       $endTime = strtotime($event['endTime']);
       $bookingPeriod = $event['bookingPeriod'];
       $interval = '+' . $bookingPeriod . ' minutes';
-      
       $capacity = 6;
+
       $currentTime = $startTime;
         
         while ($currentTime < $endTime) {
@@ -90,6 +98,7 @@ try {
         
             $currentTime = strtotime("+$bookingPeriod minutes", $currentTime);
         }
+
    
       for ($i = 1; $i <= count($slots); $i++) {
           $slotTime = date('H:i', $startTime);
@@ -102,7 +111,7 @@ try {
           $maxReservationNumberResult = $maxReservationNumberStmt->fetch(PDO::FETCH_ASSOC);
           $maxReservationNumber = $maxReservationNumberResult['maxReservationNumber'];
           $takenSlots = $maxReservationNumber ?? 0;
-           
+
            // Check if the slots are fully taken
     $isFullyTaken = $takenSlots >= $capacity;
  // Display the appropriate slot information
@@ -113,14 +122,13 @@ try {
     $slotClass = 'slot-available';
     $linkClass = '';
 
-    echo '<div><a href="../questions/questions.php?eventId=' . $event['id'] . '&startDate=' . $event['startDate'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
+    echo '<div><a href="edit_reservation.php?edit=' . urlencode($editValue) . '&startDate=' . $event['startDate'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
 }
 
 $startTime = strtotime($interval, $startTime);
 }
-
 // Reset slots
- $slots = [];
+$slots = [];
 
 if ($isFullyTaken) {
 echo '<div>Fully Reserved</div>';

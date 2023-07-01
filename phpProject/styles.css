@@ -1,9 +1,8 @@
 body {
   display: flex;
-
-  
-    font-family: Arial, sans-serif;
-    background-color: #e8f5e9;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  background-color: #e8f5e9;
   }
   
   .required {
@@ -71,17 +70,10 @@ body {
   .buttons a:hover {
     background-color: #FAAF00;
   }
-  
-  /* .container {
-    max-width: 100%;
-    padding: 20px;
-    background-color: #dcedc8;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  } */
+
   .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
   
 h1{
@@ -97,7 +89,7 @@ h1{
   
   h2 {
     margin-top: 0;
-    color: #E60032;
+    color: #A66EA7;
     text-align: center;
   }
   
@@ -129,7 +121,7 @@ h1{
   }
   
   a {
-    color: #f5f2f3;
+    color: #64B13C;
     text-decoration: none;
   }
   
@@ -140,31 +132,12 @@ h1{
     padding: auto;
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     z-index: 999;
   }
 
-  .sidebar {
-    background-color: #64B13C;
-    width: 0;
-    position: fixed;
-    top: 80px;
-    left: 0;
-    bottom: 0;
-    z-index: 999;
-    transition: width 0.3s ease-in-out;
-    overflow-y: auto;
-    /*hover effect*/
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 200);
-    /*animation*/
-
-
-}
   
-.sidebar.show {
-  width: 250px;
-}
 
 .toggle-button {
   display: flex;
@@ -204,16 +177,41 @@ h1{
   top: 8px;
 }
   
-  .sidebar ul {
-    list-style-type: none;
-    margin: 20px 0;
-    padding: 0;
-    text-align: center;
+
+.sidebar {
+  background-color: #64B13C;
+  width: 0;
+  height: 0;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  border-radius: 30%;
 }
+
+.sidebar.show {
+  width: 250px;
+  height: 230px; /* Adjust the height based on your needs */
+  text-align: center;
+  /*center the content of the sidebar*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.sidebar ul {
+  margin: 20px 0;
+  padding: 0;
+  text-align: center;
+}
+
 .sidebar ul li {
   margin-bottom: 10px;
 }
-  
+
 .sidebar ul li a {
   color: #FFF;
   text-decoration: none;
@@ -221,10 +219,13 @@ h1{
   padding: 10px;
   border-radius: 4px;
 }
+
+
   
 .content {
   margin-left: 80px;
   padding: 20px;
+  position: center;
 }
   
   .icon-delete {
@@ -279,11 +280,11 @@ h1{
   
   form input[type="text"],
   form textarea {
-    width: 100%;
+    width: 10%;
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #faaf007e;
+    background-color: #f5d79169;
     color: #000;
   }
   
@@ -309,11 +310,65 @@ h1{
   form .required {
     color: #E60032;
   }
-  
-  .page-container {
-    background-color: #FDFDFD;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+
+  .form-container {
+    overflow: auto;
+    padding: 0 20px;
+
 }
   
+  .page-container {
+    background-color: #e8f5e9;
+    padding: 20px;
+    box-shadow: 0px 0px 25px rgba(5, 0, 5, 0.5);
+    border-radius: 5px;
+}
+
+.reservation-container {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #e8f5e9;
+  box-shadow: 0px 0px 25px rgba(5, 0, 5, 0.5);
+  border-radius: 5px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+
+
+}
+
+.search-container {
+  position: relative;
+  float: right;
+  margin-bottom: 20px;
+  /*make it be in the right upper corner*/
+  right: 0;
+  top: 0;
+  
+}
+
+.search-container input[type="text"] {
+  padding: 5px;
+  font-size: 17px;
+  border: 1px solid #64B13C;
+  width: 200px;
+  background-color: #f1f8e9;
+  border-radius: 5px;
+  color: #000;
+}
+
+.search-container button[type="submit"] {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px 10px;
+  border: none;
+  background-color: #64B13C;
+  color: #FFF;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.search-container button[type="submit"]:hover {
+  background-color: #4CAF50;
+}

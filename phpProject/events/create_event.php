@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <title>Rezervace CMcZŠ</title>
     <link rel="stylesheet" href="../styles.css">
+    
 </head>
 <body class="container">
-    <div class="sidebar">
-        <ul>
-            <li><a href="create_event.html">Vytvořit událost</a></li>
-            <li><a href="event_list.php">Události</a></li>
-            <li><a href="../questions/questions.html">Dotazník</a></li>
-        </ul>
-    </div>
+    <?php include '../sidebar.php'; ?>
+
     <h2>Vytvoř novou událost</h2>
     <form action="save_event.php" method="post" id="event-create-form-id">
         <fieldset>
@@ -24,7 +20,6 @@
             <div class="field-group">
                 <label for="startDate">Datum začátku</label>
                 <input type="date" id="startDate" name="startDate" required>
-                <div class="description">Začátek nesmí být v minulosti. Datum je ve formátu mm/dd/rrrr (např. 12/21/2012).</div>
             </div>
             <div class="field-group">
                 <label for="startTime">Čas začátku</label>

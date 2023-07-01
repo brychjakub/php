@@ -28,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $legalRepresentativeHomeAddressCity = $_POST['legalRepresentativeHomeAddressCity'];
     $legalRepresentativeHomeAddressPostcode = $_POST['legalRepresentativeHomeAddressPostcode'];
     $note = $_POST['note'];
+    $eventDate = $_POST['eventDate'];
+
 
     // Database configuration
     $dbHost     = 'localhost';
@@ -43,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare the SQL statement to update the reservation data
-        $stmt = $pdo->prepare('UPDATE pupils SET firstname = ?, lastname = ?, childBirthDay = ?, childHomeAddressStreet = ?, childHomeAddressNumber = ?, childHomeAddressCity = ?, childHomeAddressPostcode = ?, legalRepresentativeFirstname = ?, legalRepresentativeSurname = ?, legalRepresentativeEmail = ?, legalRepresentativePhone = ?, legalRepresentativeHomeAddressStreet = ?, legalRepresentativeHomeAddressNumber = ?, legalRepresentativeHomeAddressCity = ?, legalRepresentativeHomeAddressPostcode = ?, note = ? WHERE id = ?');
+        $stmt = $pdo->prepare('UPDATE pupils SET firstname = ?, lastname = ?, childBirthDay = ?, childHomeAddressStreet = ?, childHomeAddressNumber = ?, childHomeAddressCity = ?, childHomeAddressPostcode = ?, legalRepresentativeFirstname = ?, legalRepresentativeSurname = ?, legalRepresentativeEmail = ?, legalRepresentativePhone = ?, legalRepresentativeHomeAddressStreet = ?, legalRepresentativeHomeAddressNumber = ?, legalRepresentativeHomeAddressCity = ?, legalRepresentativeHomeAddressPostcode = ?, note = ?, eventDate = ? WHERE id = ?');
 
         // Bind the parameters to the prepared statement
         $stmt->bindParam(1, $firstname);
@@ -62,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(14, $legalRepresentativeHomeAddressCity);
         $stmt->bindParam(15, $legalRepresentativeHomeAddressPostcode);
         $stmt->bindParam(16, $note);
-        $stmt->bindParam(17, $reservationIdToUpdate);
-
+        $stmt->bindParam(17, $eventDate);
+        $stmt->bindParam(18, $reservationIdToUpdate);
         // Execute the prepared statement
         $stmt->execute();
 
@@ -137,6 +139,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $legalRepresentativeHomeAddressCity = $reservation['legalRepresentativeHomeAddressCity'];
     $legalRepresentativeHomeAddressPostcode = $reservation['legalRepresentativeHomeAddressPostcode'];
     $note = $reservation['note'];
+    $eventDate = $reservation['eventDate'];
+
 }
 ?>
 <!DOCTYPE html>
@@ -145,11 +149,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Edit Reservation</title>
     <link rel="stylesheet" href="../styles.css">
+    <script src="../questions.js"></script>
+
 </head>
 <body class="container">
+    <?php include '../sidebar.php'; ?>
     <h2>Edit Reservation</h2>
     <form action="edit_reservation.php" method="post" id="reservation-edit-form-id">
-        <fieldset>
+    <h3>Podrobnosti dítěte</h3>
+
+    <fieldset>
+
             <!-- Include your form fields here -->
             <div class="field-group">
                 <label for="firstname">Jméno<span class="required">*</span></label>
@@ -192,6 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input class="text" type="text" id="childHomeAddressPostcode" name="childHomeAddressPostcode" value="<?php echo $childHomeAddressPostcode; ?>" required>
                 <div class="description">PSČ (Dítě)</div>
             </div>
+            </fieldset>
 
             <h3>Podrobnosti zákonného zástupce</h3>
             <fieldset class="group">
@@ -252,14 +263,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="description">PSČ (Zákonný zástupce)</div>
                 </div>
 
+                
                 <div class="field-group">
-                    <label for="note">Poznámka</label>
-                    <textarea class="textarea" type="text" id="note" name="note"><?php echo $note; ?></textarea>
-                    <div class="description">Poznámka (Zákonný zástupce), 250 Maximální počet znaků</div>
+                            <label for="note">Čas rezervace</label>
+                            <?php
+                        if (isset($_GET['slotTime'])) {
+                            $slotTime = $_GET['slotTime'];
+                        } else {
+                            $slotTime = '';
+                        }
+                        ?>
+
+                            <input class="text" type="text" name="note" readonly value="<?php echo $slotTime ? $slotTime : $note; ?>">
+                            
                 </div>
+               <div class="field-group">
+<label for="eventDate">Datum rezervace</label>
+<textarea class="textarea" id="eventDate" name="eventDate" readonly><?php echo isset($_GET['startDate']) ? date('d.m.Y', strtotime($_GET['startDate'])) : ''; ?></textarea>
+</div>
+<a href="edit_time.php?edit=<?php echo $reservation['id']; ?>">
+                            <span class="icon-edit">změnit čas a datum</span>
+                            </a>
             </fieldset>
             <input type="hidden" name="reservationIdToUpdate" value="<?php echo $reservationId; ?>">
-        </fieldset>
         <div class="buttons-container">
             <div class="buttons">
                 <input type="submit" value="Uložit">

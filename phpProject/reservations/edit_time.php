@@ -122,7 +122,7 @@ try {
     $slotClass = 'slot-available';
     $linkClass = '';
 
-    echo '<div><a href="edit_reservation.php?edit=' . urlencode($editValue) . '&startDate=' . $event['startDate'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
+    echo '<div><a href="edit_reservation.php?edit=' . urlencode($editValue) . '&startDate=' . $event['startDate'] . '&slotTime=' . $slotTime . '&eventID=' . $event['id'] . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
 }
 
 $startTime = strtotime($interval, $startTime);

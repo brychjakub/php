@@ -1,15 +1,13 @@
 <?php
 if (empty($_GET['edit']) && empty($_POST['reservationIdToUpdate'])) {
     // Redirect to the reservation admin page
-    header('Location: reservation_admin.php');
-    exit();
+     header('Location: reservation_admin.php');
+     exit();
 }
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the form data and perform necessary validation
-    // ...
-
+    
     // Update the reservation details in the database
     $reservationIdToUpdate = $_POST['reservationIdToUpdate'];
     $firstname = $_POST['firstname'];
@@ -29,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $legalRepresentativeHomeAddressPostcode = $_POST['legalRepresentativeHomeAddressPostcode'];
     $note = $_POST['note'];
     $eventDate = $_POST['eventDate'];
-
+    
 
     // Database configuration
     $dbHost     = 'localhost';
@@ -66,9 +64,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(16, $note);
         $stmt->bindParam(17, $eventDate);
         $stmt->bindParam(18, $reservationIdToUpdate);
+
         // Execute the prepared statement
         $stmt->execute();
 
+        // Retrieve the event ID based on the event date
+        $eventDateFormatted = date('Y-m-d', strtotime($eventDate));
+        $eventQuery = $pdo->prepare('SELECT id FROM events WHERE startDate = ?');
+        $eventQuery->bindParam(1, $eventDateFormatted);
+        $eventQuery->execute();
+        $event = $eventQuery->fetch(PDO::FETCH_ASSOC);
+        if ($event) {
+            $eventId = $event['id'];
+        
+            // Update the event ID in the reservations table
+            $updateStmt = $pdo->prepare('UPDATE reservations SET eventID = ? WHERE pupilID = ?');
+            $updateStmt->bindParam(1, $eventId);
+            $updateStmt->bindParam(2, $reservationIdToUpdate);
+            $updateStmt->execute();
+        } else {
+            echo "No event found for the provided date.";
+        }
+        try {
+            $updateStmt->execute();
+        } catch (PDOException $e) {
+            // Display error message
+            echo 'Update Error: ' . $e->getMessage();
+        }
         // Close the database connection
         $pdo = null;
     } catch (PDOException $e) {
@@ -78,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Redirect to the reservation admin page or a success page
      header('Location: reservation_admin.php');
-    exit();
+     exit();
 } else {
     // Retrieve the reservation details from the database based on the reservation ID
     $reservationId = $_GET['edit'];
@@ -110,8 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$reservation) {
             // Redirect to the reservation admin page
-             header('Location: reservation_admin.php');
-            exit();
+            header('Location: reservation_admin.php');
+           exit();
         }
 
         // Close the database connection
@@ -140,9 +162,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $legalRepresentativeHomeAddressPostcode = $reservation['legalRepresentativeHomeAddressPostcode'];
     $note = $reservation['note'];
     $eventDate = $reservation['eventDate'];
-
 }
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -293,5 +316,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </form>
+    
 </body>
 </html>

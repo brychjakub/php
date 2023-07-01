@@ -15,7 +15,7 @@
         /* The rest of your styles... */
     </style>
     <div class="header-wrapper">
-<header style="background-color: #e8f5e9; padding: 20px; text-align: center;">
+<header>
 </header>
     </div>
 <!-- Your existing HTML content -->

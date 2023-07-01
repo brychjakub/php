@@ -15,7 +15,7 @@
         
     </style>
 <footer>
-<img src="../cmczs2.png" alt="Your Image Description" style="max-width: 100%;">
+<img src="../cmczs2.png" alt="School logo">
 
     <p>© 2016-2023 Cyrilometodějská církevní základní škola Brno, Lerchova 65, Brno</p>
     <p>Zřizovatel školy:</p>

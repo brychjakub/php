@@ -44,7 +44,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') 
 
         if ($pupilCount > 0) {
             // Redirect to the "sorry.html" page
-            header('Location: sorry.html');
+            header('Location: sorry.php');
             exit();
         }
 

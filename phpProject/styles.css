@@ -125,7 +125,7 @@ h1{
     text-decoration: none;
   }
   
-  .header {
+  .header-search {
     /*Increase the z-index to keep it on top of other elements*/
     background-color: #64B13C;
     color: #FFF;
@@ -371,4 +371,18 @@ h1{
 
 .search-container button[type="submit"]:hover {
   background-color: #4CAF50;
+}
+
+
+footer {
+  color: #FAAF00;
+  text-align: center;
+  padding: 20px 0;
+  background: #fff;
+}
+
+.page-content {
+  min-height: 100vh;  /* Minimum height of 100 viewport heights */
+  display: flex;  /* Make use of flexbox layout */
+  flex-direction: column;  /* Stack children vertically */
 }

@@ -39,6 +39,8 @@ $pdo = null;
     
 </head>
 <body>
+<?php include '../header.php'; ?>
+
 <?php include '../sidebar.php'; ?>
 
         <div class="reservation-container">
@@ -77,5 +79,8 @@ $pdo = null;
             </table>
         </div>
     </div>
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

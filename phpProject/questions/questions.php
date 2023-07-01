@@ -17,14 +17,15 @@
 <head>
     <link rel="stylesheet" href="../styles.css">
     <meta charset="UTF-8">
-    <script src="../questions.js"></script>
+    <script src="questions.js"></script>
 
     <title>User Information</title>
 
          
 </head>
-<body>
-<div class="form-container">
+<body class="container">
+<?php include '../header.php'; ?>
+
 
 <?php include '../sidebar_user.php'; ?>
 
@@ -147,8 +148,9 @@
         
     </form>
 
-    </div>
-
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>
 

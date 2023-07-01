@@ -172,10 +172,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Edit Reservation</title>
     <link rel="stylesheet" href="../styles.css">
-    <script src="../questions.js"></script>
+    <script src="../questions/questions.js"></script>
 
 </head>
 <body class="container">
+<?php include '../header.php'; ?>
+
     <?php include '../sidebar.php'; ?>
     <h2>Edit Reservation</h2>
     <form action="edit_reservation.php" method="post" id="reservation-edit-form-id">
@@ -316,6 +318,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </form>
-    
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

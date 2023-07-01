@@ -125,8 +125,17 @@ try {
     <meta charset="UTF-8">
     <title>Rezervace CMcZŠ</title>
     <link rel="stylesheet" href="../styles.css">
-<?php include '../sidebar.php'; ?>
+
 </head>
+<body>
+<?php include '../header.php'; ?>
+
+
+    <?php include '../sidebar.php'; ?>
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
+</body>
 </html>
 
 

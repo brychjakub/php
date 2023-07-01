@@ -143,6 +143,8 @@ function calculateOpenPositions($startTime, $endTime, $bookingPeriod) {
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body class="container">
+<?php include '../header.php'; ?>
+
 <?php include '../sidebar.php'; ?>
 
     <h2>Vytvoř novou událost</h2>
@@ -191,5 +193,8 @@ function calculateOpenPositions($startTime, $endTime, $bookingPeriod) {
             </div>
         </div>
     </form>
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

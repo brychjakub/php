@@ -40,6 +40,8 @@ $pdo = null;
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
+<?php include '../header.php'; ?>
+
     <div class="container">
         <div class="sidebar">
             <ul>
@@ -165,5 +167,8 @@ echo '<div>Fully Reserved</div>';
             // Add your logic to handle the reservation for the selected event and slot
         }
     </script>
+     <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

@@ -5,12 +5,20 @@
     <title>Reservation Success</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
-<body class="container">
+
+<body class="reservation-container">
+<?php include '../header.php'; ?>
+
+    <?php include '../sidebar_user.php'; ?>
+
     <h1>Výborně 😊 Vaše rezervace proběhla úspěšně!</h1>
     <p>Za několik okamžiků dostanete potvrzovací email. Pokud ne, stačí nám zavolat a my pro Vás rezervaci překontrolujeme.
         Pokud byste chtěli změnit některý údaj určitě nás kontaktujte.
     </p>
 
     <p><a href="../reservations/reservation.php">Pokračovat na kontrolu registrace</a></p>
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

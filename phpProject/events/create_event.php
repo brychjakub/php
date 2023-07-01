@@ -7,6 +7,8 @@
     
 </head>
 <body class="container">
+<?php include '../header.php'; ?>
+
     <?php include '../sidebar.php'; ?>
 
     <h2>Vytvoř novou událost</h2>
@@ -51,5 +53,8 @@
             </div>
         </div>
     </form>
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

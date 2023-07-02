@@ -48,6 +48,7 @@ $pdo = null;
     <link rel="stylesheet" href="../styles.css">
 </head>
 
+
     <?php include '../sidebar_user.php'; ?>
    
     <body class="container">
@@ -55,8 +56,9 @@ $pdo = null;
 
 <div class="search-container">
     <form method="get" action="">
-        <input type="text" name="search" value="<?= htmlentities($search) ?>" placeholder="Search for pupils">
-        <button type="submit">Search</button>
+        <input type="text" name="search" value="<?= htmlentities($search) ?>" placeholder="Zadejte jméno">
+        <button type="submit">hledat
+        </button>
     </form>
 </div>
 </header>
@@ -90,5 +92,8 @@ $pdo = null;
             <p>No pupils found.</p>
         <?php endif; ?>
     </div>
+     <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

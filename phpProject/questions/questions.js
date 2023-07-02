@@ -37,6 +37,8 @@ var dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
 var postcodeRegex = /^[\d+]+$/;
 var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 var letterRegex = /^[A-Za-z]+$/;
+var sqlInjectionRegex = /[\/*\\']/;
+
 
 // Perform validation
 
@@ -57,6 +59,35 @@ if (!postcodeRegex.test(legalRepresentativePhone)) {
 alert("Invalid phone number format. Please enter a valid phone number.");
 return false;
 }
+
+    // Check for SQL injection characters in all variables
+
+var variables = [
+    firstname,
+    lastname,
+    childBirthDay,
+    childHomeAddressStreet,
+    childHomeAddressNumber,
+    childHomeAddressCity,
+    childHomeAddressPostcode,
+    legalRepresentativeFirstname,
+    legalRepresentativeSurname,
+    legalRepresentativeEmail,
+    legalRepresentativePhone,
+    legalRepresentativeHomeAddressStreet,
+    legalRepresentativeHomeAddressNumber,
+    legalRepresentativeHomeAddressCity,
+    legalRepresentativeHomeAddressPostcode,
+    note
+];
+
+for (var i = 0; i < variables.length; i++) {
+    if (sqlInjectionRegex.test(variables[i])) {
+        alert("Prosím, nepoužívejte speciální znaky (* / \\ ' apod.)");
+        return false;
+    }
+}
+
 // If all fields pass validation, the form can be submitted
 return true;
 }

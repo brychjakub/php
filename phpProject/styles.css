@@ -125,7 +125,7 @@ h1{
     text-decoration: none;
   }
   
-  .header {
+  .header-search {
     /*Increase the z-index to keep it on top of other elements*/
     background-color: #64B13C;
     color: #FFF;
@@ -236,6 +236,7 @@ h1{
   .icon-delete:hover {
     cursor: pointer;
   }
+
   
   .slot-available {
     color: #64B13C; /* Green color for available slots */
@@ -288,6 +289,18 @@ h1{
     color: #000;
   }
   
+  form input[type="password"],
+  form input[type="username"],
+  form textarea {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f5d79169;
+    color: #000;
+  }
+
+
   form .description {
     color: #000000;
     font-style: italic;
@@ -371,4 +384,22 @@ h1{
 
 .search-container button[type="submit"]:hover {
   background-color: #4CAF50;
+}
+
+
+footer {
+  color: #FAAF00;
+  text-align: center;
+  padding: 20px 0;
+  background: #fff;
+}
+
+.page-content {
+  min-height: 100vh;  /* Minimum height of 100 viewport heights */
+  display: flex;  /* Make use of flexbox layout */
+  flex-direction: column;  /* Stack children vertically */
+  
+  justify-content: center;
+  align-items: center;
+ 
 }

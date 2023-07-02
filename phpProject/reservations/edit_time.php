@@ -1,3 +1,6 @@
+<?php include '../login/auth.php'; ?>
+
+
 <?php
 // Database configuration
 $servername = 'localhost';
@@ -40,6 +43,8 @@ $pdo = null;
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
+<?php include '../header.php'; ?>
+
     <div class="container">
         <div class="sidebar">
             <ul>
@@ -122,7 +127,7 @@ try {
     $slotClass = 'slot-available';
     $linkClass = '';
 
-    echo '<div><a href="edit_reservation.php?edit=' . urlencode($editValue) . '&startDate=' . $event['startDate'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
+    echo '<div><a href="edit_reservation.php?edit=' . urlencode($editValue) . '&startDate=' . $event['startDate'] . '&slotTime=' . $slotTime . '&eventID=' . $event['id'] . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
 }
 
 $startTime = strtotime($interval, $startTime);
@@ -165,5 +170,8 @@ echo '<div>Fully Reserved</div>';
             // Add your logic to handle the reservation for the selected event and slot
         }
     </script>
+     <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

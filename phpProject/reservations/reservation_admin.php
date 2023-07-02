@@ -1,3 +1,6 @@
+<?php include '../login/auth.php'; ?>
+
+
 <?php
 // Database configuration
 $dbHost     = 'localhost';
@@ -47,20 +50,18 @@ $pdo = null;
     <title>Pupils List</title>
     <link rel="stylesheet" href="../styles.css">
 </head>
+<body class="container">
 
     <?php include '../sidebar.php'; ?>
    
-    <body class="container">
-    <header>
-
-<div class="search-container">
+<header>
+ <div class="search-container">
     <form method="get" action="">
-        <input type="text" name="search" value="<?= htmlentities($search) ?>" placeholder="Search for pupils">
-        <button type="submit">Search</button>
+        <input type="text" name="search" value="<?= htmlentities($search) ?>" placeholder="Zadejte jméno">
+        <button type="submit">Hledat</button>
     </form>
-</div>
+</div> 
 </header>
-
 
 
     <h2>Všichni žáci</h2>
@@ -108,6 +109,8 @@ $pdo = null;
             <p>No pupils found.</p>
         <?php endif; ?>
     </div>
-  
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

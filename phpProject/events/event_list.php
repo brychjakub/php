@@ -1,3 +1,5 @@
+<?php include '../login/auth.php'; ?>
+
 <?php
 // Database configuration
 $servername = 'localhost';
@@ -39,17 +41,17 @@ $pdo = null;
     
 </head>
 <body>
+
 <?php include '../sidebar.php'; ?>
 
         <div class="reservation-container">
-        <h2>Kdy to bude</h2>
+        <h2>Všechny akce, tu vaši vyberete kliknutím na název</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Název</th>
                         <th>Kdy</th>
                         <th>Úprava</th>
-                        <th>Stav</th>
                         <th>Smazat</th>
                     </tr>
                 </thead>
@@ -57,15 +59,13 @@ $pdo = null;
                     <?php foreach ($events as $event): ?>
                         <tr>
                         <td><a href="event_details.php?eventId=<?php echo $event['id']; ?>"><?php echo $event['eventName']; ?></a></td>
-        <td><?php echo date('d.m.Y', strtotime($event['startDate'])); ?> ; <?php echo date('H:i', strtotime($event['startTime'])); ?> - <?php echo date('H:i', strtotime($event['endTime'])); ?></td>
+        <td><?php echo date('d.m.Y', strtotime($event['startDate'])); ?> , <?php echo date('H:i', strtotime($event['startTime'])); ?> - <?php echo date('H:i', strtotime($event['endTime'])); ?></td>
         <td>
             <a href="edit_event.php?edit=<?php echo $event['id']; ?>">
                 <span class="icon-edit">✏️</span>
             </a>
         </td>
-        <td>
-            <?php echo ($event['eventOpen'] ? 'Otevřeno' : 'Uzavřeno'); ?>
-        </td>
+       
         <td>
             <a href="delete_event.php?delete=<?php echo $event['id']; ?>" onclick="return confirm('Are you sure you want to delete this event?');">
                 <span class="icon-delete">🗑️</span>
@@ -77,5 +77,8 @@ $pdo = null;
             </table>
         </div>
     </div>
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

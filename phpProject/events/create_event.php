@@ -1,3 +1,5 @@
+<?php include '../login/auth.php'; ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,8 @@
     
 </head>
 <body class="container">
+<?php include '../header.php'; ?>
+
     <?php include '../sidebar.php'; ?>
 
     <h2>Vytvoř novou událost</h2>
@@ -35,14 +39,14 @@
                 <input type="text" id="bookingPeriod" name="bookingPeriod" pattern="\d+" title="Zadejte číslo jako interval (v minutách)" required>
                 <div class="description">Interval (v minutách) určující frekvenci rezervačních oken</div>
             </div>
-            <fieldset class="group">
+         <!--    <fieldset class="group">
                 <legend>Otevřeno pro veřejnost?</legend>
                 <div class="checkbox">
                     <input type="checkbox" name="eventOpen" id="eventOpen">
                     <label for="eventOpen"></label>
                 </div>
                 <div class="description">Uzavřené události se nezobrazují uživatelům a nepovolují vytvářet další rezervace</div>
-            </fieldset>
+            </fieldset> -->
         </fieldset>
         <div class="buttons-container">
             <div class="buttons">
@@ -51,5 +55,8 @@
             </div>
         </div>
     </form>
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

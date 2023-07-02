@@ -1,4 +1,31 @@
-<?php
+<?php include '../login/auth.php'; ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rezervace CMcZŠ</title>
+    <link rel="stylesheet" href="../styles.css">
+    
+</head>
+<body>
+<header>
+
+ <div class="search-container">
+    <form method="get" action="">
+    <h4> Prot tisk stiskněte CTRL+P.</h4>
+    <h4> Pro uložení do PDF stiskněte CTRL+P a zvolte </h4>
+    <h4>  "tisk do PDF" nebo "print to PDF". </h4>
+
+    </form>
+</div> 
+</header>
+
+    <?php include '../sidebar.php'; ?>
+    <main>
+    <div class="page-content">
+
+    <?php
 // Database configuration
 $servername = 'localhost';
 $username = 'root';
@@ -26,6 +53,7 @@ try {
         $startTime = strtotime($event['startTime']);
         $endTime = strtotime($event['endTime']);
         $bookingPeriod = $event['bookingPeriod'];
+
         
         $slots = array();
         $currentTime = $startTime;
@@ -69,22 +97,26 @@ try {
         }
 
         // Display the event details
+        echo '<div class="reservation-container">';
         echo '<h2>Detaily události</h2>';
+        echo '<p>(Úpravy registrací lze provést v sekci <a href="../reservations/reservation_admin.php">Všechny registrace</a>)</p>';
         echo '<table>';
         echo '<thead>';
-        echo '<p>Název: ' . $event['eventName'] . '</p>';
-        echo '<p>Čas začátku: ' . $event['startTime'] . '</p>';
-        echo '<p>Čas konce: ' . $event['endTime'] . '</p>';
+        echo '<h4>Název: ' . $event['eventName'] . '</h4>';
+        echo '<h4>Datum: ' . date('d.m.Y', strtotime($event['startDate'])) . '</h4>';
+
+        echo '<h4>Čas začátku: ' . $event['startTime'] . '</h4>';
+        echo '<h4>Čas konce: ' . $event['endTime'] . '</h4>';
+        echo '</div>';
         echo '</thead>';
 
         echo '</table>';
 
 
         // Display the reservation slots and corresponding pupil details
-        echo '<h2>Rezervační časy</h2>';
         foreach ($slots as $index => $slot) {
             echo '<div class="slot">';
-            echo '<h2>'  . $slot['time'] . '</h2>';
+            echo '<h2>' . 'Zapsaní na ' . $slot['time'] . '</h2>';
 
             if (!empty($slot['pupils'])) {
                 echo '<table>';
@@ -103,7 +135,7 @@ try {
 
                 echo '</table>';
             } else {
-                echo '<p>Zatím nikdo 😢</p>';
+                echo '<p style="text-align: center;">Zatím nikdo 😢</p>';
             }
 
             echo '</div>';
@@ -119,14 +151,12 @@ try {
     echo 'Chyba: ' . $e->getMessage();
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Rezervace CMcZŠ</title>
-    <link rel="stylesheet" href="../styles.css">
-<?php include '../sidebar.php'; ?>
-</head>
+    </div>
+    </main>
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
+</body>
 </html>
 
 

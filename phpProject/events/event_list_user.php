@@ -40,10 +40,13 @@ $pdo = null;
     
 </head>
 <body>
+
+       <?php include '../header.php'; ?>
     <?php include '../sidebar_user.php'; ?>
+    <h1>Vítejte! 😊</h1>
+    <h2>Vyberte si kdy se vám to hodí a klikněte na název akce.</h2>
 
         <div class="reservation-container">
-            <h2>Kdy to bude</h2>
             <table>
                 <thead>
                     <tr>
@@ -55,7 +58,7 @@ $pdo = null;
                     <?php foreach ($events as $event): ?>
                         <tr>
                             <td><a href="#" onclick="showOptions(<?php echo $event['id']; ?>)"><?php echo $event['eventName']; ?></a></td>
-                            <td><?php echo date('d.m.Y', strtotime($event['startDate'])); ?> ; <?php echo date('H:i', strtotime($event['startTime'])); ?> - <?php echo date('H:i', strtotime($event['endTime'])); ?></td>
+                            <td><?php echo date('d.m.Y', strtotime($event['startDate'])); ?> ,  <?php echo date('H:i', strtotime($event['startTime'])); ?> - <?php echo date('H:i', strtotime($event['endTime'])); ?></td>
 
                         </tr>
                         <tr id="options-<?php echo $event['id']; ?>" style="display: none;">
@@ -107,13 +110,13 @@ try {
     $isFullyTaken = $takenSlots >= $capacity;
  // Display the appropriate slot information
  if ($isFullyTaken) {
-    echo '<div>Fully Reserved</div>';
+    echo '<div>zaplněno</div>';
 } else {
     // Apply CSS classes based on the slots availability
     $slotClass = 'slot-available';
     $linkClass = '';
 
-    echo '<div><a href="../questions/questions.php?eventId=' . $event['id'] . '&startDate=' . $event['startDate'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' slots taken)</div>';
+    echo '<div><a href="../questions/questions.php?eventId=' . $event['id'] . '&startDate=' . $event['startDate'] . '&slotTime=' . $slotTime . '" class="' . $linkClass . ' ' . $slotClass . '">' . $slotTime . '</a> (' . $takenSlots . '/' . $capacity . ' míst zaplněno)</div>';
 }
 
 $startTime = strtotime($interval, $startTime);
@@ -157,5 +160,8 @@ echo '<div>Fully Reserved</div>';
             // Add your logic to handle the reservation for the selected event and slot
         }
     </script>
+        <?php include '../footer.php'; ?>
+
+
 </body>
 </html>

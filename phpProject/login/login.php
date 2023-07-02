@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+// Check if the user is already logged in
+if (isset($_SESSION['username'])) {
+    // User is already logged in, redirect to the desired page
+    header('Location: ../events/event_list.php');
+    exit();
+}
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the submitted username and password
@@ -27,12 +36,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($submittedPassword, $user['password'])) {
-            // Authentication successful, redirect to the desired page
+            // Authentication successful, set the user's session variables
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+
+            // Redirect to the desired page
             header('Location: ../events/event_list.php');
             exit();
         } else {
             // Authentication failed, display an error message
-            $errorMessage = 'Invalid username or password';
+            $errorMessage = 'Špatné jméno nebo heslo.';
         }
     } catch (PDOException $e) {
         // Display error message
@@ -51,25 +64,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <?php if (isset($errorMessage)) : ?>
-        <p><font color="red"><?php echo $errorMessage; ?></font></p>
-    <?php endif; ?>
+        <?php include '../sidebar_user.php'; ?>
 
-    <h3>Login with Username and Password</h3>
+   
     <form action="login.php" method="POST">
         <table>
             <tr>
-                <td>Username:</td>
-                <td><input type="text" name="username" value=""></td>
+                <td>Jméno:</td>
+                <td><input type="username" name="username" value=""></td>
             </tr>
             <tr>
-                <td>Password:</td>
+                <td>Heslo:</td>
                 <td><input type="password" name="password"></td>
             </tr>
-            <tr>
-                <td colspan="2"><input name="submit" type="submit" value="Login"></td>
-            </tr>
-        </table>
+            <div class="buttons">
+            <td colspan="2" style="text-align: center;"><button name="submit" type="submit" value="Login">Přihlásit se</button></td>
+            </div>        </table>
+            <?php if (isset($errorMessage)) : ?>
+        <p style="text-align: center; color: red;"><?php echo $errorMessage; ?></p>
+    <?php endif; ?>
     </form>
 </body>
 </html>

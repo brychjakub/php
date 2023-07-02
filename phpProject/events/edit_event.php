@@ -1,3 +1,6 @@
+
+<?php include '../login/auth.php'; ?>
+
 <?php
 if (empty($_GET['edit']) && empty($_POST['eventIdToUpdate'])) {
     // Redirect to the event list page
@@ -42,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(3, $startTime);
         $stmt->bindParam(4, $endTime);
         $stmt->bindParam(5, $bookingPeriod);
-        $stmt->bindParam(6, $eventOpen);
         $stmt->bindParam(7, $openPositions);
         $stmt->bindParam(8, $eventIdToUpdate);
 
@@ -108,7 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $startTime = $event['startTime'];
     $endTime = $event['endTime'];
     $bookingPeriod = $event['bookingPeriod'];
-    $eventOpen = $event['eventOpen'];
 }
 
 /**
@@ -143,6 +144,8 @@ function calculateOpenPositions($startTime, $endTime, $bookingPeriod) {
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body class="container">
+<?php include '../header.php'; ?>
+
 <?php include '../sidebar.php'; ?>
 
     <h2>Vytvoř novou událost</h2>
@@ -172,14 +175,7 @@ function calculateOpenPositions($startTime, $endTime, $bookingPeriod) {
                 <input type="text" id="bookingPeriod" name="bookingPeriod" pattern="\d+" value="<?php echo $bookingPeriod; ?>" required>
                 <div class="description">Interval (v minutách) určující frekvenci rezervačních oken</div>
             </div>
-            <fieldset class="group">
-                <legend>Otevřeno pro veřejnost?</legend>
-                <div class="checkbox">
-                    <input type="checkbox" name="eventOpen" id="eventOpen" <?php echo $eventOpen ? 'checked' : ''; ?>>
-                    <label for="eventOpen"></label>
-                </div>
-                <div class="description">Uzavřené události se nezobrazují uživatelům a nepovolují vytvářet další rezervace</div>
-            </fieldset>
+           
 
             <!-- Hidden input to store the old event ID -->
             <input type="hidden" name="eventIdToUpdate" value="<?php echo $eventId; ?>">
@@ -191,5 +187,8 @@ function calculateOpenPositions($startTime, $endTime, $bookingPeriod) {
             </div>
         </div>
     </form>
+    <footer>
+        <?php include '../footer.php'; ?>
+    </footer>
 </body>
 </html>

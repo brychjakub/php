@@ -13,6 +13,7 @@ $baseUrl = 'http://localhost/phpProject';
     <li><a href="https://www.cmczs.cz">Zpět na stránky školy</a></li>
     <li><a href="<?php echo $baseUrl; ?>/events/event_list_user.php">Registrace</a></li>
     <li><a href="<?php echo $baseUrl; ?>/reservations/reservation.php">Všechny rezervace</a></li>
+    <li><a href="<?php echo $baseUrl; ?>/login/login.php">Přihlásit se</a></li>
 
 </ul>
 </div>

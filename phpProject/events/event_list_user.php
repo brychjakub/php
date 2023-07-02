@@ -43,13 +43,14 @@ $pdo = null;
 
        <?php include '../header.php'; ?>
     <?php include '../sidebar_user.php'; ?>
-    <h2>Kdy to bude?</h2>
+    <h1>Vítejte! 😊</h1>
+    <h2>Vyberte si kdy se vám to hodí a klikněte na název akce.</h2>
 
         <div class="reservation-container">
             <table>
                 <thead>
                     <tr>
-                        <th>Co</th>
+                        <th>Název</th>
                         <th>Kdy</th>
                     </tr>
                 </thead>

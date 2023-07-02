@@ -36,8 +36,8 @@ try {
     // Configure SMTP settings
     $mail->Host       = 'smtp.office365.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'brych@cmczs.cz';
-    $mail->Password   = 'Iphone4S';
+    $mail->Username   = '<jakékoliv jméno>@cmczs.cz';
+    $mail->Password   = '<heslo k emailu>';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use STARTTLS encryption
     $mail->Port       = 587;
 

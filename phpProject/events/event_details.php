@@ -1,4 +1,30 @@
-<?php
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rezervace CMcZŠ</title>
+    <link rel="stylesheet" href="../styles.css">
+    
+</head>
+<body>
+<header>
+
+ <div class="search-container">
+    <form method="get" action="">
+    <h4> Prot tisk stiskněte CTRL+P.</h4>
+    <h4> Pro uložení do PDF stiskněte CTRL+P a zvolte </h4>
+    <h4>  "tisk do PDF" nebo "print to PDF". </h4>
+
+    </form>
+</div> 
+</header>
+
+    <?php include '../sidebar.php'; ?>
+    <main>
+    <div class="page-content">
+
+    <?php
 // Database configuration
 $servername = 'localhost';
 $username = 'root';
@@ -26,6 +52,7 @@ try {
         $startTime = strtotime($event['startTime']);
         $endTime = strtotime($event['endTime']);
         $bookingPeriod = $event['bookingPeriod'];
+
         
         $slots = array();
         $currentTime = $startTime;
@@ -73,18 +100,20 @@ try {
         echo '<table>';
         echo '<thead>';
         echo '<p>Název: ' . $event['eventName'] . '</p>';
+        echo '<p>Datum: ' . date('d.m.Y', strtotime($event['startDate'])) . '</p>';
+
         echo '<p>Čas začátku: ' . $event['startTime'] . '</p>';
         echo '<p>Čas konce: ' . $event['endTime'] . '</p>';
+
         echo '</thead>';
 
         echo '</table>';
 
 
         // Display the reservation slots and corresponding pupil details
-        echo '<h2>Rezervační časy</h2>';
         foreach ($slots as $index => $slot) {
             echo '<div class="slot">';
-            echo '<h2>'  . $slot['time'] . '</h2>';
+            echo '<h2>' . 'Registrovaní na ' . $slot['time'] . '</h2>';
 
             if (!empty($slot['pupils'])) {
                 echo '<table>';
@@ -103,7 +132,7 @@ try {
 
                 echo '</table>';
             } else {
-                echo '<p>Zatím nikdo 😢</p>';
+                echo '<p style="text-align: center;">Zatím nikdo 😢</p>';
             }
 
             echo '</div>';
@@ -119,19 +148,8 @@ try {
     echo 'Chyba: ' . $e->getMessage();
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Rezervace CMcZŠ</title>
-    <link rel="stylesheet" href="../styles.css">
-
-</head>
-<body>
-<?php include '../header.php'; ?>
-
-
-    <?php include '../sidebar.php'; ?>
+    </div>
+    </main>
     <footer>
         <?php include '../footer.php'; ?>
     </footer>

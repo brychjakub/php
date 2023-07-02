@@ -236,6 +236,7 @@ h1{
   .icon-delete:hover {
     cursor: pointer;
   }
+
   
   .slot-available {
     color: #64B13C; /* Green color for available slots */
@@ -385,4 +386,8 @@ footer {
   min-height: 100vh;  /* Minimum height of 100 viewport heights */
   display: flex;  /* Make use of flexbox layout */
   flex-direction: column;  /* Stack children vertically */
+  
+  justify-content: center;
+  align-items: center;
+ 
 }

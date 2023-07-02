@@ -97,6 +97,7 @@ try {
         }
 
         // Display the event details
+        echo '<div class="reservation-container">';
         echo '<h2>Detaily události</h2>';
         echo '<p>(Úpravy registrací lze provést v sekci <a href="../reservations/reservation_admin.php">Všechny registrace</a>)</p>';
         echo '<table>';
@@ -106,7 +107,7 @@ try {
 
         echo '<h4>Čas začátku: ' . $event['startTime'] . '</h4>';
         echo '<h4>Čas konce: ' . $event['endTime'] . '</h4>';
-
+        echo '</div>';
         echo '</thead>';
 
         echo '</table>';

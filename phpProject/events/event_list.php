@@ -41,12 +41,11 @@ $pdo = null;
     
 </head>
 <body>
-<?php include '../header.php'; ?>
 
 <?php include '../sidebar.php'; ?>
 
         <div class="reservation-container">
-        <h2>Všechny akce</h2>
+        <h2>Všechny akce, tu vaši vyberete kliknutím na název</h2>
             <table>
                 <thead>
                     <tr>

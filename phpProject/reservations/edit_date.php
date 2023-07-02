@@ -1,3 +1,6 @@
+<?php include '../login/auth.php'; ?>
+
+
 <?php
 // Check if the edit value and event ID are present in the URL
 if (isset($_GET['edit']) && isset($_GET['eventID'])) {

@@ -1,3 +1,4 @@
+
 <?php
 require 'C:\xampp\htdocs\vendor\phpmailer\phpmailer\src\PHPMailer.php';
 require 'C:\xampp\htdocs\vendor\phpmailer\phpmailer\src\SMTP.php';
@@ -36,8 +37,8 @@ try {
     // Configure SMTP settings
     $mail->Host       = 'smtp.office365.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = '<jakékoliv jméno>@cmczs.cz';
-    $mail->Password   = '<heslo k emailu>';
+    $mail->Username   = '<email>';
+    $mail->Password   = '<heslo>';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use STARTTLS encryption
     $mail->Port       = 587;
 

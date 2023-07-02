@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         } else {
             // Authentication failed, display an error message
-            $errorMessage = 'Invalid username or password';
+            $errorMessage = 'Špatné jméno nebo heslo.';
         }
     } catch (PDOException $e) {
         // Display error message
@@ -66,22 +66,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
         <?php include '../sidebar_user.php'; ?>
 
-    <?php if (isset($errorMessage)) : ?>
-        <p><font color="red"><?php echo $errorMessage; ?></font></p>
-    <?php endif; ?>
+   
     <form action="login.php" method="POST">
         <table>
             <tr>
-                <td>Username:</td>
+                <td>Jméno:</td>
                 <td><input type="username" name="username" value=""></td>
             </tr>
             <tr>
-                <td>Password:</td>
+                <td>Heslo:</td>
                 <td><input type="password" name="password"></td>
             </tr>
             <div class="buttons">
             <td colspan="2" style="text-align: center;"><button name="submit" type="submit" value="Login">Přihlásit se</button></td>
             </div>        </table>
+            <?php if (isset($errorMessage)) : ?>
+        <p style="text-align: center; color: red;"><?php echo $errorMessage; ?></p>
+    <?php endif; ?>
     </form>
 </body>
 </html>

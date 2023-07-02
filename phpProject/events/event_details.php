@@ -1,3 +1,4 @@
+<?php include '../login/auth.php'; ?>
 
 <!DOCTYPE html>
 <html>
@@ -97,13 +98,14 @@ try {
 
         // Display the event details
         echo '<h2>Detaily události</h2>';
+        echo '<p>(Úpravy registrací lze provést v sekci <a href="../reservations/reservation_admin.php">Všechny registrace</a>)</p>';
         echo '<table>';
         echo '<thead>';
-        echo '<p>Název: ' . $event['eventName'] . '</p>';
-        echo '<p>Datum: ' . date('d.m.Y', strtotime($event['startDate'])) . '</p>';
+        echo '<h4>Název: ' . $event['eventName'] . '</h4>';
+        echo '<h4>Datum: ' . date('d.m.Y', strtotime($event['startDate'])) . '</h4>';
 
-        echo '<p>Čas začátku: ' . $event['startTime'] . '</p>';
-        echo '<p>Čas konce: ' . $event['endTime'] . '</p>';
+        echo '<h4>Čas začátku: ' . $event['startTime'] . '</h4>';
+        echo '<h4>Čas konce: ' . $event['endTime'] . '</h4>';
 
         echo '</thead>';
 
@@ -113,7 +115,7 @@ try {
         // Display the reservation slots and corresponding pupil details
         foreach ($slots as $index => $slot) {
             echo '<div class="slot">';
-            echo '<h2>' . 'Registrovaní na ' . $slot['time'] . '</h2>';
+            echo '<h2>' . 'Zapsaní na ' . $slot['time'] . '</h2>';
 
             if (!empty($slot['pupils'])) {
                 echo '<table>';

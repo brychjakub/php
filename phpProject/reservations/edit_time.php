@@ -1,3 +1,6 @@
+<?php include '../login/auth.php'; ?>
+
+
 <?php
 // Database configuration
 $servername = 'localhost';

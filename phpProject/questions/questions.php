@@ -24,7 +24,6 @@
          
 </head>
 <body class="container">
-<?php include '../header.php'; ?>
 
 
 <?php include '../sidebar_user.php'; ?>
@@ -47,7 +46,7 @@
         </div>
 
         <div class="field-group">
-            <label for="childBirthDay">Narození<span class="required">*</span></label>
+            <label for="childBirthDay">Datum narození<span class="required">*</span></label>
 
             <input class="text" type="text" id="childBirthDay" name="childBirthDay"  required>
         </div>
@@ -140,7 +139,7 @@
 
 <div class="buttons-container">
             <div class="buttons">
-        <button type="submit">Submit</button>
+        <button type="submit">Potvrdit</button>
         <a href="../events/event_list_user.php">Zrušit</a>
 
     </div>

@@ -1,3 +1,6 @@
+<?php include '../login/auth.php'; ?>
+
+
 <?php
 if (empty($_GET['edit']) && empty($_POST['reservationIdToUpdate'])) {
     // Redirect to the reservation admin page
@@ -170,17 +173,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Edit Reservation</title>
+    <title>Upravit registraci</title>
     <link rel="stylesheet" href="../styles.css">
     <script src="../questions/questions.js"></script>
 
 </head>
 <body class="container">
-<?php include '../header.php'; ?>
 
     <?php include '../sidebar.php'; ?>
-    <h2>Edit Reservation</h2>
     <form action="edit_reservation.php" method="post" id="reservation-edit-form-id">
+    <h2>Upravit registraci</h2>
+
     <h3>Podrobnosti dítěte</h3>
 
     <fieldset>
@@ -199,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="field-group">
-                <label for="childBirthDay">Narození<span class="required">*</span></label>
+                <label for="childBirthDay">Datum narození<span class="required">*</span></label>
                 <input class="text" type="text" id="childBirthDay" name="childBirthDay" value="<?php echo $childBirthDay; ?>" required>
                 <div class="description">Narození (Dítě). Datum je ve formátu dd.mm.rrrr</div>
             </div>

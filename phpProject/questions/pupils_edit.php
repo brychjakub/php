@@ -1,3 +1,6 @@
+<?php include '../login/auth.php'; ?>
+
+
 <?php
 if (empty($_GET['edit']) && empty($_POST['reservationIdToUpdate'])) {
     // Redirect to the reservation admin page

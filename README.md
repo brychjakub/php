@@ -3,6 +3,6 @@
 - hashed passwords
 - authenticated login
 - sql injection protected
-- and much more
+- data saved in MySql database
 
 - for full overvirew, checkout the "ukázka" folder

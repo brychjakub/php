@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $startTime = $_POST['startTime'];
     $endTime = $_POST['endTime'];
     $bookingPeriod = $_POST['bookingPeriod'];
-    $eventOpen = isset($_POST['eventOpen']) ? 1 : 0;
     
     // Count the open positions based on start time, end time, and booking period
     $openPositions = calculateOpenPositions($startTime, $endTime, $bookingPeriod);
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare the SQL statement to update the event data
-        $stmt = $pdo->prepare('UPDATE events SET eventName = ?, startDate = ?, startTime = ?, endTime = ?, bookingPeriod = ?, eventOpen = ?, openPositions = ? WHERE id = ?');
+        $stmt = $pdo->prepare('UPDATE events SET eventName = ?, startDate = ?, startTime = ?, endTime = ?, bookingPeriod = ?, openPositions = ? WHERE id = ?');
 
         // Bind the parameters to the prepared statement
         $stmt->bindParam(1, $eventName);
@@ -45,8 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(3, $startTime);
         $stmt->bindParam(4, $endTime);
         $stmt->bindParam(5, $bookingPeriod);
-        $stmt->bindParam(7, $openPositions);
-        $stmt->bindParam(8, $eventIdToUpdate);
+        $stmt->bindParam(6, $openPositions);
+        $stmt->bindParam(7, $eventIdToUpdate);
 
         // Execute the prepared statement
         $stmt->execute();

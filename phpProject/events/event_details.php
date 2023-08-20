@@ -13,7 +13,7 @@
 
  <div class="search-container">
     <form method="get" action="">
-    <h4> Prot tisk stiskněte CTRL+P.</h4>
+    <h4> Pro tisk stiskněte CTRL+P.</h4>
     <h4> Pro uložení do PDF stiskněte CTRL+P a zvolte </h4>
     <h4>  "tisk do PDF" nebo "print to PDF". </h4>
 

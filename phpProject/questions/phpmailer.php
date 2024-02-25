@@ -1,4 +1,3 @@
-
 <?php
 require 'C:\xampp\htdocs\vendor\phpmailer\phpmailer\src\PHPMailer.php';
 require 'C:\xampp\htdocs\vendor\phpmailer\phpmailer\src\SMTP.php';
@@ -37,15 +36,13 @@ try {
     // Configure SMTP settings
     $mail->Host       = 'smtp.office365.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = '<email>';
-    $mail->Password   = '<heslo>';
+    $mail->Username   = 'brych@cmczs.cz';
+    $mail->Password   = 'Iphone4S';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use STARTTLS encryption
     $mail->Port       = 587;
 
     // Set email subject
-
     $mail->setFrom('brych@cmczs.cz', 'Jakub');
-
     $mail->Subject = 'Potvrzení zápisu';
 
     // Set email body
@@ -53,21 +50,20 @@ try {
 
     toto jsou informace, které jste použili během zápisu.
     
-    Jméno: ' . $firstname . '
-    Příjmení: ' . $lastname . '
-    Datum narození: ' . $childBirthDay . '
-    Adresa dítěte: ' . $childHomeAddressStreet . ' ' . $childHomeAddressNumber . ', ' . $childHomeAddressCity . ', ' . $childHomeAddressPostcode . '
-    Jméno zákonného zástupce: ' . $legalRepresentativeFirstname . ' ' . $legalRepresentativeSurname . '
-    Email zákonného zástupce: ' . $legalRepresentativeEmail . '
-    Telefon zákonného zástupce: ' . $legalRepresentativePhone . '
-    Adresa zákonného zástupce: ' . $legalRepresentativeHomeAddressStreet . ' ' . $legalRepresentativeHomeAddressNumber . ', ' . $legalRepresentativeHomeAddressCity . ', ' . $legalRepresentativeHomeAddressPostcode . '
-    K zápisu přijďte: ' . $eventDate . ' ' . $note . ' 
+    Jméno: ' . $row['firstname'] . '
+    Příjmení: ' . $row['lastname'] . '
+    Datum narození: ' . $row['childBirthDay'] . '
+    Adresa dítěte: ' . $row['childHomeAddressStreet'] . ' ' . $row['childHomeAddressNumber'] . ', ' . $row['childHomeAddressCity'] . ', ' . $row['childHomeAddressPostcode'] . '
+    Jméno zákonného zástupce: ' . $row['legalRepresentativeFirstname'] . ' ' . $row['legalRepresentativeSurname'] . '
+    Email zákonného zástupce: ' . $row['legalRepresentativeEmail'] . '
+    Telefon zákonného zástupce: ' . $row['legalRepresentativePhone'] . '
+    Adresa zákonného zástupce: ' . $row['legalRepresentativeHomeAddressStreet'] . ' ' . $row['legalRepresentativeHomeAddressNumber'] . ', ' . $row['legalRepresentativeHomeAddressCity'] . ', ' . $row['legalRepresentativeHomeAddressPostcode'] . '
+    K zápisu přijďte: ' . $row['eventDate'] . ' ' . $row['note'] . ' 
     
     Děkujeme za váš čas.
     
     S pozdravem,
     Jakub';
-
 
     // Set recipient(s)
     $mail->addAddress($row['legalRepresentativeEmail'], 'Recipient Name');
@@ -83,5 +79,7 @@ try {
     }
 } catch(PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
+} catch (Exception $e) {
+    echo "An error occurred: " . $e->getMessage();
 }
 ?>
